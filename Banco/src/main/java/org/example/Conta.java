@@ -1,16 +1,21 @@
 package org.example;
 
 public class Conta {
-    private static int numero;
-    private String agencia;
+    private int idConta;
+    private static int numContas;
     private String titular;
     private double saldo;
 
-    public Conta(String agencia, String titular) {
-        numero++;
-        this.agencia = agencia;
+    public Conta(String titular) {
+        numContas++;
+        idConta = numContas;
         this.titular = titular;
         this.saldo = 0;
+    }
+    public void imprimeinfo(){
+        System.out.println("Conta: " + idConta);
+        System.out.println("Titular: " + titular);
+        System.out.println("Saldo: " + saldo);
     }
 
     public double getSaldo() {
@@ -20,9 +25,6 @@ public class Conta {
         this.saldo = saldo;
     }
 
-    public String getAgencia() {
-        return agencia;
-    }
 
     public String getTitular() {
         return titular;
@@ -37,10 +39,10 @@ public class Conta {
         return false;
     }
 
-    public boolean transferir(Conta a,double valor) {
+    public boolean transferir(Conta remetente,double valor) {
         if(sacar(valor)) {
-            double saldo = a.getSaldo();
-            a.setSaldo(saldo+=valor);
+            double saldo = remetente.getSaldo();
+            remetente.setSaldo(saldo+=valor);
             return true;
         }
         return false;

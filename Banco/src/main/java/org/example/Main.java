@@ -4,14 +4,26 @@ package org.example;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        CPoupanca a = new CPoupanca("Felipe");
+        CSalario b = new CSalario("Claudio");
+        CDeposito c = new CDeposito("Feli");
+        CDeposito d = new CDeposito("Fe");
+        CPoupanca e = new CPoupanca("lipe");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        a.depositar(100);
+        a.transferir(b,50);
+
+        a.transferir(c,51);
+        c.depositar(500);
+        c.sacar(500.01);
+
+        c.transferir(e,20.53);
+
+        a.imprimeinfo();
+        b.imprimeinfo();
+        c.imprimeinfo();
+        d.imprimeinfo();
+        e.imprimeinfo();
+
     }
 }

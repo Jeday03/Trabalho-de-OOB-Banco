@@ -1,7 +1,7 @@
 package org.example;
 
 public class CSalario extends Conta {
-    public CSalario(String agencia,String titular){
-        super( agencia, titular);
+    public CSalario(String titular){
+        super(titular);
     }
 }

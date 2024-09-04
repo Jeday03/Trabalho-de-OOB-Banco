@@ -1,11 +1,11 @@
 package org.example;
 
 public class CDeposito extends Conta{
-    public CDeposito(String agencia,String titular) {
-        super( agencia, titular);
+    public CDeposito(String titular) {
+        super(titular);
     }
 
-    public void Depositar(double valor) {
+    public void depositar(double valor) {
         double saldo = getSaldo();
         setSaldo(saldo+=valor);
     }

@@ -1,7 +1,8 @@
 package org.example;
 
-public class CPoupanca extends Conta{
+public class CPoupanca extends CDeposito{
     public CPoupanca(String agencia,String titular, double saldo) {
-        super( agencia, titular, saldo);
+        super(agencia, titular, saldo);
     }
+
 }

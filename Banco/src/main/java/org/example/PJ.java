@@ -4,8 +4,8 @@ public class PJ extends Pessoa{
 
     private String cnpj;
 
-    public PJ(String tipo, String nome, String email, String senha,String cnpj) {
-        super("Pessoa Jurídica",nome, email, senha);
+    public PJ(String nome, String email, String senha,String cnpj) {
+        super(nome, email, senha);
         this.cnpj = cnpj;
     }
 

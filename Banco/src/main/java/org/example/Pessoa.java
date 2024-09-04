@@ -1,13 +1,11 @@
 package org.example;
 
 public class Pessoa {
-    private String tipo;
     private String nome;
     private String email;
     private String senha;
 
-    public Pessoa( String tipo,String nome, String email, String senha) {
-        this.tipo = tipo;
+    public Pessoa( String nome, String email, String senha) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;

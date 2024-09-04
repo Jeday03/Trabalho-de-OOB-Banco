@@ -7,7 +7,7 @@ public class Conta {
     private String titular;
     private double saldo;
 
-    public Conta(String agencia, String titular, double saldo, String tipo) {
+    public Conta(String tipo,String agencia, String titular, double saldo) {
         this.tipo = tipo;
         numero++;
         this.agencia = agencia;

@@ -6,7 +6,11 @@ import org.example.Deposito.CDeposito;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        CPoupanca a = new CPoupanca("Felipe");
+        PF pessoaA = new PF("Felipe","felipe@gmail.com","1234","123.456.789-07");
+        CPoupanca a = new CPoupanca(pessoaA.getNome());
+        pessoaA.setConta(a);
+
+
         CSalario b = new CSalario("Claudio");
         CDeposito c = new CDeposito("Feli");
         CDeposito d = new CDeposito("Fe");
@@ -25,13 +29,13 @@ public class Main {
 
         c.transferir(e,20.53);
 
-        a.imprimeinfo();
+        pessoaA.getConta().imprimeinfo();
         b.imprimeinfo();
         c.imprimeinfo();
         d.imprimeinfo();
         e.imprimeinfo();
 
-        a.imprimeTransacoes();
+        pessoaA.getConta().imprimeTransacoes();
         b.imprimeTransacoes();
 
     }

@@ -10,7 +10,7 @@ public class Conta {
     private double saldo;
     List<Transacao> transacoes = new ArrayList<>();
 
-    public Conta(String titular) {
+    protected Conta(String titular) {
         numContas++;
         idConta = numContas;
         this.titular = titular;

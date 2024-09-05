@@ -1,6 +1,8 @@
 package org.example;
 
-public class CPoupanca extends CDeposito{
+import org.example.Deposito.CDeposito;
+
+public class CPoupanca extends CDeposito {
     public CPoupanca(String titular) {
         super(titular);
     }

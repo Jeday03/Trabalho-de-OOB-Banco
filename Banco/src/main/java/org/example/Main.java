@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.Deposito.CDeposito;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
@@ -10,8 +12,12 @@ public class Main {
         CDeposito d = new CDeposito("Fe");
         CPoupanca e = new CPoupanca("lipe");
 
+
         a.depositar(100);
         a.transferir(b,50);
+        a.sacar(10);
+
+        b.sacar(10);
 
         a.transferir(c,51);
         c.depositar(500);
@@ -24,6 +30,9 @@ public class Main {
         c.imprimeinfo();
         d.imprimeinfo();
         e.imprimeinfo();
+
+        a.imprimeTransacoes();
+        b.imprimeTransacoes();
 
     }
 }

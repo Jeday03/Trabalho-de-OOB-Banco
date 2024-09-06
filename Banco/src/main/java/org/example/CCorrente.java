@@ -1,10 +1,10 @@
 package org.example;
 
-import org.example.Deposito.CDeposito;
+import org.example.Pacote.CDeposito;
 
 public class CCorrente extends CDeposito {
-    public CCorrente(String titular) {
-        super(titular);
+    public CCorrente() {
+        super();
     }
 
 }

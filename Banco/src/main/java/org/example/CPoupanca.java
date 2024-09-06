@@ -1,10 +1,10 @@
 package org.example;
 
-import org.example.Deposito.CDeposito;
+import org.example.Pacote.CDeposito;
 
 public class CPoupanca extends CDeposito {
-    public CPoupanca(String titular) {
-        super(titular);
+    public CPoupanca() {
+        super();
     }
 
 }

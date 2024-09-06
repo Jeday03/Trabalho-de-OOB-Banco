@@ -1,10 +1,13 @@
-package org.example.Deposito;
+package org.example.Pacote;
+
+import org.example.CSalario;
+import org.example.PJ;
 
 import java.util.Date;
 
 public class CDeposito extends Conta {
-    public CDeposito(String titular) {
-        super(titular);
+    public CDeposito() {
+        super();
     }
 
     public boolean depositar(double valor) {
@@ -17,4 +20,5 @@ public class CDeposito extends Conta {
         }
         return false;
     }
+
 }

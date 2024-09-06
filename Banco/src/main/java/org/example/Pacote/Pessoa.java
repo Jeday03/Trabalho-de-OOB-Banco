@@ -1,6 +1,6 @@
-package org.example;
+package org.example.Pacote;
 
-import org.example.Deposito.Conta;
+import org.example.CSalario;
 
 public class Pessoa {
     private String nome;
@@ -8,16 +8,18 @@ public class Pessoa {
     private String senha;
     private Conta conta;
 
-    public Pessoa( String nome, String email, String senha) {
+    protected Pessoa( String nome, String email, String senha, Conta conta) {
+//        if(conta instanceof CSalario){
+//            throw new IllegalArgumentException("Pessoas jurídicas não podem ter conta Salário");
+//        }
         this.nome = nome;
         this.email = email;
         this.senha = senha;
-        this.conta = null;
-    }
-
-    public void setConta(Conta conta) {
+        conta.setTitular(this);
         this.conta = conta;
     }
+
+
     public Conta getConta() {
         return conta;
     }

@@ -1,6 +1,9 @@
 package org.example;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+
+import javax.swing.JFrame;
+
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
@@ -36,10 +39,22 @@ public class Main {
         cMarcos.imprimeTransacoes();
         cClaudio.imprimeTransacoes();
 
+        //vou implementar a inteface a partir daqui
 
-
-
-
+        // Cria o frame
+        JFrame LoginFrame = new JFrame("Login");
+        
+        Login loginPanel = new Login();
+        
+        // foi
+        LoginFrame.setContentPane(loginPanel);
+        
+        // inicializa bonitinho
+        LoginFrame.setSize(800, 500); 
+        LoginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        LoginFrame.pack();
+        LoginFrame.setVisible(true); 
+        LoginFrame.setLocationRelativeTo(null);
 
 
     }

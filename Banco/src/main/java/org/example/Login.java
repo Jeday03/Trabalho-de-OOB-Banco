@@ -64,7 +64,7 @@ public class Login extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("SimSun-ExtB", 0, 60)); // NOI18N
         jLabel6.setText("FRYP");
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pngwing.com (2).png"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/maior.png"))); // NOI18N
         jLabel7.setText(" ");
 
         javax.swing.GroupLayout EsquerdaLayout = new javax.swing.GroupLayout(Esquerda);
@@ -211,7 +211,24 @@ public class Login extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+                                        
+        // Teste inicial
+        // Ainda precisa conferir se a conta existe e os dados estão corretos
+
+        //cuidado mexendo que pode dar merda
+         UserInterface painelDoUsuario = new UserInterface(); 
+
+         painelDoUsuario.setSize(800, 500); 
+         painelDoUsuario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+         painelDoUsuario.setLocationRelativeTo(null);
+         painelDoUsuario.setVisible(true); 
+
+         JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+         if (parentFrame != null) {
+             parentFrame.dispose();
+         }
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

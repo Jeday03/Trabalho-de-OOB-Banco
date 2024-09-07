@@ -5,6 +5,7 @@
 package org.example;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 /**
@@ -62,7 +63,7 @@ public class SingUp extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(0, 102, 102));
         jPanel2.setPreferredSize(new java.awt.Dimension(400, 500));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pngwing.com (2).png"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/maior.png"))); // NOI18N
         jLabel7.setText(" ");
 
         jLabel5.setFont(new java.awt.Font("SimSun-ExtB", 0, 80)); // NOI18N
@@ -339,6 +340,8 @@ public class SingUp extends javax.swing.JPanel {
         LoginFrame.setVisible(true); 
         LoginFrame.setLocationRelativeTo(null);
         JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        JOptionPane.showMessageDialog(null, "Sua Conta foi enviada para um gerente avaliar! \n                    Aguarde a Aprovação!" , "Conta Criada", JOptionPane.INFORMATION_MESSAGE);
+        //JOptionPane.showMessageDialog(null, "Sua Conta foi enviada para um gerente avaliar \n                    Aguarde a Aprovação!");
         parentFrame.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -1,9 +1,7 @@
 package org.example.Pacote;
 
-import org.example.CSalario;
-import org.example.PJ;
-
 import java.util.Date;
+import java.util.List;
 
 public class CDeposito extends Conta {
     public CDeposito() {
@@ -11,14 +9,18 @@ public class CDeposito extends Conta {
     }
 
     public boolean depositar(double valor) {
-        if(valor>0) {
+        if (valor > 0) {
             double saldo = getSaldo();
-            setSaldo(null,saldo += valor);
+            setSaldo(null, saldo + valor); // Atualizar o saldo
             Date data = new Date();
-            transacoes.add(new Transacao(valor,data,"Depósito",null,null));
+            // Adicionar transação ao extrato
+            List<Transacao> transacoes = getExtrato().get(getIdConta());
+            if (transacoes != null) {
+                transacoes.add(new Transacao(valor, data, "Depósito", null, null));
+            }
             return true;
         }
         return false;
     }
-
 }
+

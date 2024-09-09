@@ -3,18 +3,26 @@ package org.example;
 import org.example.Pacote.Conta;
 import org.example.Pacote.Pessoa;
 
-public class PF extends Pessoa {
-
+public class PF extends Cliente {
     private String cpf;
 
-    public PF(String nome, String email, String senha, String cpf, Conta conta) {
-        super(nome, email, senha,conta);
+    public PF(String nome, String telefone, String email, String senha, String endereco, String cpf) {
+        super(nome, telefone, email, senha, endereco);
         this.cpf = cpf;
     }
-
 
     public String getCpf() {
         return cpf;
     }
 
+    @Override
+    public void abrirConta() {
+        CCorrente contaCorrente = new CCorrente();
+
+    }
+
+    @Override
+    public void fecharConta() {
+        System.out.println("Conta de Pessoa Física encerrada.");
+    }
 }

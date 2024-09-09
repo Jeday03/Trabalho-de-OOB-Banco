@@ -11,8 +11,8 @@ public class Main {
         CPoupanca cFelipe = new CPoupanca();
         CCorrente cMarcos = new CCorrente();
 
-        PF pf1 = new PF("Felipe","felipe@gmail.com","1234","123.456.789-01",cFelipe);
-        PF pf2 = new PF("Claudio","claudio@gmail.com","1234","123.456.789-01",cClaudio);
+        PF pf1 = new PF("Felipe","32938034","felipe@gmail.com","1234","rio branco 4065","123.456.789-01");
+        PF pf2 = new PF("Claudio","83230223","claudio@gmail.com","1234","RIo branco","123.456.789-01");
 
 //        try{
 //            PJ pj1 = new PJ("Marcos","marcos@gmail.com","1234","123.456.789-01",p1);
@@ -21,39 +21,23 @@ public class Main {
 //            System.out.println(e.getMessage());
 //        }
 
-        PJ pj1 =  new PJ("Marcos","marcos@gmail.com","1234","123.456.789-01", cMarcos);
-
-        cFelipe.depositar(100);
-        cFelipe.sacar(20);
-        cFelipe.transferir(cMarcos,50);
-
-        cFelipe.transferir(cClaudio,10);
-
-        cMarcos.transferir(cClaudio,20);
-
-        cClaudio.imprimeinfo();
-        cFelipe.imprimeinfo();
-        cMarcos.imprimeinfo();
-
-        cFelipe.imprimeTransacoes();
-        cMarcos.imprimeTransacoes();
-        cClaudio.imprimeTransacoes();
+        PJ pj1 =  new PJ("Marcos","329994895","marcos@gmail.com","1234","bom pastor","889370001");
 
         //vou implementar a inteface a partir daqui
 
         // Cria o frame
         JFrame LoginFrame = new JFrame("Login");
-        
+
         Login loginPanel = new Login();
-        
+
         // foi
         LoginFrame.setContentPane(loginPanel);
-        
+
         // inicializa bonitinho
-        LoginFrame.setSize(800, 500); 
-        LoginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        LoginFrame.setSize(800, 500);
+        LoginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         LoginFrame.pack();
-        LoginFrame.setVisible(true); 
+        LoginFrame.setVisible(true);
         LoginFrame.setLocationRelativeTo(null);
 
 

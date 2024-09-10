@@ -11,4 +11,3 @@
 - Verificar se dados estão certos
 - Diferenciar se é fisico ou juridico
 - Modelo de Arquivos (emprestimos, loggin, Pessoas, transferencias)
-- 

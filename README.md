@@ -1,6 +1,6 @@
 # Trabalho-de-OOB-Banco
 # SEMPRE ANTES DE CODAR DA UM PULL!
-![Diagrama de Classe Banco(1)](https://github.com/user-attachments/assets/1d1abc8c-213f-4940-ad2a-84d3dfb9fb4f)
+![Diagrama de Classe Banco](https://github.com/user-attachments/assets/d9dde3c9-8d41-482f-b230-4e78be59bde8)
 # TODO
 - Gerente
 - Emprestimo

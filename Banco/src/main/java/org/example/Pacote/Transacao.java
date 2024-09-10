@@ -2,6 +2,8 @@ package org.example.Pacote;
 import java.util.Date;
 
 public class Transacao {
+    private static int numtransacoes;
+    private int idtransacao;
     private double valor;
     private Date data = new Date();
     private String tipo;
@@ -9,11 +11,17 @@ public class Transacao {
     private String remetente;
 
     Transacao(double valor,Date data, String tipo, String autor,String remetente) {
+        numtransacoes++;
+        idtransacao = numtransacoes;
         this.valor = valor;
         this.data = data;
         this.tipo = tipo;
         this.autor = autor;
         this.remetente = remetente;
+    }
+
+    public int getIdtransacao() {
+        return idtransacao;
     }
 
     double getValor() {
@@ -35,6 +43,4 @@ public class Transacao {
     String getRemetente() {
         return remetente;
     }
-
-
 }

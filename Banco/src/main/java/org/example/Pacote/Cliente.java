@@ -1,6 +1,6 @@
-package org.example;
+package org.example.Pacote;
 
-import org.example.Pacote.Pessoa;
+import org.example.Pessoa;
 
 public abstract class Cliente extends Pessoa {
     private static int id;
@@ -20,6 +20,9 @@ public abstract class Cliente extends Pessoa {
         return endereco;
     }
 
-    public abstract void abrirConta();
+    public boolean abrirConta(Conta conta){
+        conta.setTitular(this);
+        return true;
+    };
     public abstract void fecharConta();
 }

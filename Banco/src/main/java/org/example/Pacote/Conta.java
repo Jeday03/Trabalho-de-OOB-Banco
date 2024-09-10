@@ -1,6 +1,7 @@
 package org.example.Pacote;
-import org.example.PJ;
 import org.example.CSalario;
+import org.example.Pessoa;
+
 import java.util.*;
 
 public abstract class Conta {
@@ -92,7 +93,7 @@ public abstract class Conta {
         return false;
     }
 
-    private boolean retira(double valor) {
+    protected boolean retira(double valor) {
         if (saldo >= valor) {
             saldo -= valor;
             return true;
@@ -100,26 +101,10 @@ public abstract class Conta {
         return false;
     }
 
-    public boolean transferir(Conta remetente, double valor) {
-        if (remetente instanceof CSalario) {
-            if (this.getTitular() instanceof PJ) {
-                if (retira(valor)) {
-                    double saldo = remetente.getSaldo();
-                    remetente.setSaldo(titular, saldo += valor);
-                    Date data = new Date();
-                    List<Transacao> transacoes = extrato.get(idConta);
-                    if (transacoes != null) {
-                        transacoes.add(new Transacao(-valor, data, "Transferência", "Você", remetente.getTitular().getNome()));
-                    }
-                    return true;
-                }
-                return false;
-            }
-            return false;
-        }
+    protected boolean verificaTransferencia(Conta remetente, double valor, double valorTransfere){
         if (retira(valor)) {
             double saldo = remetente.getSaldo();
-            remetente.setSaldo(titular, saldo += valor);
+            remetente.setSaldo(titular, saldo += valorTransfere);
             Date data = new Date();
             List<Transacao> transacoes = extrato.get(idConta);
             if (transacoes != null) {
@@ -128,5 +113,15 @@ public abstract class Conta {
             return true;
         }
         return false;
+    }
+
+    public boolean transferir(Conta remetente, double valor) {
+        if (remetente instanceof CSalario) {
+            if (this.getTitular() instanceof PJ) {
+                return verificaTransferencia(remetente, valor,valor);
+            }
+            return false;
+        }
+        return verificaTransferencia(remetente, valor,valor);
     }
 }

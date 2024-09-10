@@ -1,6 +1,4 @@
-package org.example.Pacote;
-
-import org.example.CSalario;
+package org.example;
 
 public class Pessoa {
     private String nome;
@@ -11,9 +9,6 @@ public class Pessoa {
     public Pessoa(){
     }
     public Pessoa( String nome,String telefone, String email, String senha) {
-//        if(conta instanceof CSalario){
-//            throw new IllegalArgumentException("Pessoas jurídicas não podem ter conta Salário");
-//        }
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;

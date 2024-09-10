@@ -1,7 +1,6 @@
 package org.example;
 
-import org.example.Pacote.Conta;
-import org.example.Pacote.Pessoa;
+import org.example.Pacote.Cliente;
 
 public class PF extends Cliente {
     private String cpf;
@@ -15,11 +14,6 @@ public class PF extends Cliente {
         return cpf;
     }
 
-    @Override
-    public void abrirConta() {
-        CCorrente contaCorrente = new CCorrente();
-
-    }
 
     @Override
     public void fecharConta() {

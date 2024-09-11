@@ -1,9 +1,8 @@
-package org.example.Pacote;
+package org.example;
 
-import org.example.CSalario;
-
-import java.util.Date;
-import java.util.List;
+import org.example.Pacote.CDeposito;
+import org.example.Pacote.Conta;
+import org.example.Pacote.PJ;
 
 public class CPoupanca extends CDeposito {
     public CPoupanca() {

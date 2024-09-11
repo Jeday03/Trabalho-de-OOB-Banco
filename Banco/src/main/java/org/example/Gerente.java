@@ -1,6 +1,5 @@
 package org.example;
 
-import org.example.Pacote.Pessoa;
 
 public class Gerente extends Pessoa {
     private static int idGerente;

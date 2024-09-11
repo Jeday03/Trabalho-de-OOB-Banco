@@ -10,8 +10,7 @@ public class CDeposito extends Conta {
 
     public boolean depositar(double valor) {
         if (valor > 0) {
-            double saldo = getSaldo();
-            setSaldo(null, saldo + valor); // Atualizar o saldo
+            incrementaSaldo(null, valor); // Atualizar o saldo
             Date data = new Date();
             // Adicionar transação ao extrato
             List<Transacao> transacoes = getExtrato().get(getIdConta());

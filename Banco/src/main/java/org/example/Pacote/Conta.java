@@ -66,15 +66,15 @@ public abstract class Conta {
         return saldo;
     }
 
-    void setSaldo(Pessoa autor, double saldo) {
+    protected void incrementaSaldo(Pessoa autor, double valor) {
         if (autor != null) {
             Date data = new Date();
             List<Transacao> transacoes = extrato.get(idConta);
             if (transacoes != null) {
-                transacoes.add(new Transacao(saldo, data, "Transferência", autor.getNome(), "Você"));
+                transacoes.add(new Transacao(valor, data, "Transferência", autor.getNome(), "Você"));
             }
         }
-        this.saldo = saldo;
+        this.saldo += valor;
     }
 
     public Pessoa getTitular() {
@@ -103,8 +103,7 @@ public abstract class Conta {
 
     protected boolean verificaTransferencia(Conta remetente, double valor, double valorTransfere){
         if (retira(valor)) {
-            double saldo = remetente.getSaldo();
-            remetente.setSaldo(titular, saldo += valorTransfere);
+            remetente.incrementaSaldo(titular, valorTransfere);
             Date data = new Date();
             List<Transacao> transacoes = extrato.get(idConta);
             if (transacoes != null) {

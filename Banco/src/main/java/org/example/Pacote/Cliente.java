@@ -24,5 +24,6 @@ public abstract class Cliente extends Pessoa {
         conta.setTitular(this);
         return true;
     };
+
     public abstract void fecharConta();
 }

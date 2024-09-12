@@ -12,3 +12,4 @@
 - Verificar se dados estão certos
 - Diferenciar se é fisico ou juridico
 - Modelo de Arquivos (emprestimos, loggin, Pessoas, transferencias)
+![Documento Banco OOB.pdf](https://github.com/user-attachments/files/16971759/Documento.Banco.OOB.pdf)

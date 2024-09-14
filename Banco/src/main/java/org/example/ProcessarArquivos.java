@@ -19,14 +19,16 @@ public class ProcessarArquivos {
                                 pf.getTelefone() + ";" +
                                 pf.getEmail() + ";" +
                                 pf.getSenha() + ";" +
-                                pf.getCpf());
+                                pf.getCpf() + ";" +
+                                pf.getEndereco());
                     } else if (pessoa instanceof PJ) {
                         PJ pj = (PJ) pessoa;
                         bw.write("PJ;" + pj.getNome() + ";" +
                                 pj.getTelefone() + ";" +
                                 pj.getEmail() + ";" +
                                 pj.getSenha() + ";" +
-                                pj.getCnpj());
+                                pj.getCnpj() +";" +
+                                pj.getEndereco());
                     }
                     bw.newLine();
                 }

@@ -6,8 +6,10 @@ package org.example;
 
 import javax.swing.JFrame;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import org.example.SingUp;
 
 
 /**
@@ -232,22 +234,60 @@ public class Login extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        // Opções para o usuário escolher
+        String[] options = {"Conta PF", "Conta PJ"};
+
+        // Mostra um JOptionPane com várias opções
+        int escolha = JOptionPane.showOptionDialog(
+            null, // Componente pai, null deixa centralizado na tela
+            "Escolha Se é Pessoa Fisica Ou Juridica:", // Mensagem
+            "PF/PJ", // Título da janela
+            JOptionPane.DEFAULT_OPTION, // Tipo de caixa de diálogo
+            JOptionPane.INFORMATION_MESSAGE, // Tipo de mensagem
+            null, // Ícone, pode usar o padrão passando null
+            options, // As opções a serem exibidas
+            options[0] // Padrão de seleção (Opção padrão selecionada)
+        );
+
+        // Verifica a escolha do usuário
+        if (escolha == 0) {
+            //Cria Painel para PF
+            JFrame CriarConta = new JFrame("Criar Conta Frame PF");
+
+            SingUp singUpPanel = new SingUp();
+
+            CriarConta.setContentPane(singUpPanel);
+
+            // inicializa
+            CriarConta.setSize(800, 500); 
+            CriarConta.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+            CriarConta.pack();
+            CriarConta.setVisible(true); 
+            CriarConta.setLocationRelativeTo(null);
+            JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            parentFrame.dispose();
+        } else if (escolha == 1) {
+            //Cria Painel para PJ
+            JFrame CriarConta = new JFrame("Criar Conta Frame PJ");
+
+            SingUpPJ singUpPanel = new SingUpPJ();
+
+            CriarConta.setContentPane(singUpPanel);
+
+            // inicializa
+            CriarConta.setSize(800, 500); 
+            CriarConta.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+            CriarConta.pack();
+            CriarConta.setVisible(true); 
+            CriarConta.setLocationRelativeTo(null);
+            JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            parentFrame.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Nenhuma opção foi escolhida.");
+        }
+
         
-        JFrame CriarConta = new JFrame("Criar Conta Frame");
-        
-        SingUp singUpPanel = new SingUp();
-        
-        // foi
-        CriarConta.setContentPane(singUpPanel);
-        
-        // inicializa bonitinho
-        CriarConta.setSize(800, 500); 
-        CriarConta.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-        CriarConta.pack();
-        CriarConta.setVisible(true); 
-        CriarConta.setLocationRelativeTo(null);
-        JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        parentFrame.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed

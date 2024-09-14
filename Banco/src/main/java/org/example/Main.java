@@ -29,7 +29,7 @@ public class Main {
         String caminhoArquivo = "pessoas.txt";
         ProcessarArquivos.salvarPessoas(caminhoArquivo, listaPessoas);
         
-        
+        //LE o Arquivo
         List<Pessoa> pessoasCarregadas = ProcessarArquivos.carregarPessoas(caminhoArquivo);
         
         for (Pessoa pessoa : pessoasCarregadas) {
@@ -43,7 +43,6 @@ public class Main {
         }
         
         
-/*
         
         //vou implementar a inteface a partir daqui
 
@@ -61,7 +60,5 @@ public class Main {
         LoginFrame.pack();
         LoginFrame.setVisible(true);
         LoginFrame.setLocationRelativeTo(null);
-*/
-
     }
 }

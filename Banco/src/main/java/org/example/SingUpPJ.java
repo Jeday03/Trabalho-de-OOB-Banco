@@ -12,12 +12,12 @@ import javax.swing.SwingUtilities;
  *
  * @author rafae
  */
-public class SingUp extends javax.swing.JPanel {
+public class SingUpPJ extends javax.swing.JPanel {
 
     /**
      * Creates new form SingUp
      */
-    public SingUp() {
+    public SingUpPJ() {
         initComponents();
     }
 
@@ -166,7 +166,7 @@ public class SingUp extends javax.swing.JPanel {
         });
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel13.setText("CPF");
+        jLabel13.setText("CNPJ");
 
         jButton1.setBackground(new java.awt.Color(0, 102, 102));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));

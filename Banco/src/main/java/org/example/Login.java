@@ -221,8 +221,28 @@ public class Login extends javax.swing.JPanel {
         senha = new String(jPasswordField1.getPassword());
         
         boolean valido = ProcessarArquivos.verificarLogin("loggin.txt", email, senha);
-        
-        if(valido){
+        if ("ADMIN".equals(email) && "12345".equals(senha)) {
+            //Nâo mexe aqui que concerteza vai dar merda
+            // Cria a janela principal
+            JFrame frame = new JFrame("Interface do Gerente");
+            frame.setSize(800, 500);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+            // Adiciona o painel de login
+            InterfaceGerente loginPanel = new InterfaceGerente();
+            frame.setContentPane(loginPanel);
+
+            // Centraliza a janela na tela
+            frame.setLocationRelativeTo(null);
+
+            // Torna a janela visível
+            frame.setVisible(true);
+            JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                if (parentFrame != null) {
+                    parentFrame.dispose();
+                }
+
+        }else if(valido){
             //cuidado mexendo que pode dar merda
             UserInterface painelDoUsuario = new UserInterface(); 
 

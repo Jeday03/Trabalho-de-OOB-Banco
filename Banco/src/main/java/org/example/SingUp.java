@@ -4,6 +4,8 @@
  */
 package org.example;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -20,7 +22,13 @@ public class SingUp extends javax.swing.JPanel {
     public SingUp() {
         initComponents();
     }
-
+    List<Pessoa> listaPessoas = new ArrayList<>();
+    String nome;
+    String telefone;
+    String email;
+    String senha;
+    String endereco;
+    String cpf;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -262,30 +270,75 @@ public class SingUp extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
+        //Codigo aqui
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
-        // TODO add your handling code here:
+        //Codigo aqui
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
-        // TODO add your handling code here:
+        //Codigo aqui
     }//GEN-LAST:event_jTextField5ActionPerformed
 
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        // TODO add your handling code here:
+        //Codigo aqui
     }//GEN-LAST:event_jTextField6ActionPerformed
 
     private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
-        // TODO add your handling code here:
+        //Codigo aqui
     }//GEN-LAST:event_jTextField7ActionPerformed
 
     private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
-        // TODO add your handling code here:
+        //Codigo aqui
     }//GEN-LAST:event_jTextField8ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        
+        // Capturando os valores dos campos de texto ao clicar no botão
+        nome = jTextField1.getText();
+        senha = new String(jPasswordField1.getPassword());  // Para capturar o valor do campo de senha
+        email = jTextField5.getText();
+        endereco = jTextField6.getText();
+        telefone = jTextField7.getText();
+        cpf = jTextField8.getText();
+
+        // Verificando se todos os campos estão preenchidos (opcional, para validação)
+        if(nome.isEmpty() || senha.isEmpty() || email.isEmpty() || endereco.isEmpty() || telefone.isEmpty() || cpf.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;  // Para impedir a criação da conta com campos vazios
+        }
+        
+        // Convirmar os dados
+        int opcao = JOptionPane.showConfirmDialog(null, "Confirme seus dados:\n nome: "+ nome + 
+                "\n email: " + email +
+                "\n telefone:  " + telefone +
+                "\n endereço: " + endereco + 
+                "\n cpf: " + cpf +
+                "", "Confirmação", JOptionPane.OK_CANCEL_OPTION);
+        
+        // Verifica qual opção foi selecionada
+        if (opcao == JOptionPane.OK_OPTION) {
+            System.out.println("Usuário clicou OK.");
+        } else if (opcao == JOptionPane.CANCEL_OPTION) {
+            System.out.println("Usuário clicou Cancelar.");
+            return;
+        } else {
+            System.out.println("Usuário fechou o diálogo.");
+            return;
+        }
+
+        
+        // Criando um objeto PF com os dados inseridos
+        PF pf1 = new PF(nome, telefone, email, senha, endereco, cpf);
+        listaPessoas.add(pf1);
+
+        // Salvando os dados no arquivo
+        String caminhoArquivo = "pessoas.txt";
+        ProcessarArquivos.salvarPessoas(caminhoArquivo, listaPessoas);
+
+        
         JFrame LoginFrame = new JFrame("Login");
         
         Login loginPanel = new Login();

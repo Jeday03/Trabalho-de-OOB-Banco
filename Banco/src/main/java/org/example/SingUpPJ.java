@@ -4,9 +4,12 @@
  */
 package org.example;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import org.example.Pacote.PJ;
 
 /**
  *
@@ -20,6 +23,14 @@ public class SingUpPJ extends javax.swing.JPanel {
     public SingUpPJ() {
         initComponents();
     }
+    
+    List<Pessoa> listaPessoas = new ArrayList<>();
+    String nome;
+    String telefone;
+    String email;
+    String senha;
+    String endereco;
+    String cnpj;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -286,6 +297,50 @@ public class SingUpPJ extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField8ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        // Capturando os valores dos campos de texto ao clicar no botão
+        nome = jTextField1.getText();
+        senha = new String(jPasswordField1.getPassword());  // Para capturar o valor do campo de senha
+        email = jTextField5.getText();
+        endereco = jTextField6.getText();
+        telefone = jTextField7.getText();
+        cnpj = jTextField8.getText();
+
+        // Verificando se todos os campos estão preenchidos (opcional, para validação)
+        if(nome.isEmpty() || senha.isEmpty() || email.isEmpty() || endereco.isEmpty() || telefone.isEmpty() || cnpj.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;  // Para impedir a criação da conta com campos vazios
+        }
+        
+        // Convirmar os dados
+        int opcao = JOptionPane.showConfirmDialog(null, "Confirme seus dados:\n nome: "+ nome + 
+                "\n email: " + email +
+                "\n telefone:  " + telefone +
+                "\n endereço: " + endereco + 
+                "\n cnpj: " + cnpj +
+                "", "Confirmação", JOptionPane.OK_CANCEL_OPTION);
+        
+        // Verifica qual opção foi selecionada
+        if (opcao == JOptionPane.OK_OPTION) {
+            System.out.println("Usuário clicou OK.");
+        } else if (opcao == JOptionPane.CANCEL_OPTION) {
+            System.out.println("Usuário clicou Cancelar.");
+            return;
+        } else {
+            System.out.println("Usuário fechou o diálogo.");
+            return;
+        }
+
+        
+        // Criando um objeto PF com os dados inseridos
+        PJ pj1 = new PJ(nome, telefone, email, senha, endereco, cnpj);
+        listaPessoas.add(pj1);
+
+        // Salvando os dados no arquivo
+        String caminhoArquivo = "pessoas.txt";
+        ProcessarArquivos.salvarPessoas(caminhoArquivo, listaPessoas);
+
+        
         JFrame LoginFrame = new JFrame("Login");
         
         Login loginPanel = new Login();

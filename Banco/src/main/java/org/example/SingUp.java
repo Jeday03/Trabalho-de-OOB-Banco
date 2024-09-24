@@ -6,6 +6,8 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -308,6 +310,65 @@ public class SingUp extends javax.swing.JPanel {
         if(nome.isEmpty() || senha.isEmpty() || email.isEmpty() || endereco.isEmpty() || telefone.isEmpty() || cpf.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.", "Erro", JOptionPane.ERROR_MESSAGE);
             return;  // Para impedir a criação da conta com campos vazios
+        }
+        
+        final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
+
+        Pattern pattern = Pattern.compile(EMAIL_REGEX);
+        Matcher matcher = pattern.matcher(email);
+        
+        if(!matcher.matches()){
+            JOptionPane.showMessageDialog(null, "Email invalido" , "Erro na Criação de Conta", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        
+        String CPF_REGEX = "^\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}$|^\\d{11}$";
+
+        // Verificar o formato usando regex
+        if (!Pattern.matches(CPF_REGEX, cpf)){
+            JOptionPane.showMessageDialog(null, "CPF invalido" , "Erro na Criação de Conta", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        // Remover caracteres especiais, se existirem
+        cpf = cpf.replaceAll("\\D", "");
+
+        // Eliminar CPFs com todos os números iguais (e.g., "11111111111")
+        if (cpf.matches("(\\d)\\1{10}")) {
+            JOptionPane.showMessageDialog(null, "CPF invalido" , "Erro na Criação de Conta", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        // Calcular o primeiro dígito verificador
+        int sum = 0;
+        for (int i = 0; i < 9; i++) {
+            sum += (cpf.charAt(i) - '0') * (10 - i);
+        }
+        int firstVerifier = 11 - (sum % 11);
+        if (firstVerifier >= 10) {
+            firstVerifier = 0;
+        }
+
+        // Verificar se o primeiro dígito verificador está correto
+        if (firstVerifier != (cpf.charAt(9) - '0')) {
+            JOptionPane.showMessageDialog(null, "CPF invalido" , "Erro na Criação de Conta", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        // Calcular o segundo dígito verificador
+        sum = 0;
+        for (int i = 0; i < 10; i++) {
+            sum += (cpf.charAt(i) - '0') * (11 - i);
+        }
+        int secondVerifier = 11 - (sum % 11);
+        if (secondVerifier >= 10) {
+            secondVerifier = 0;
+        }
+
+        // Verificar se o segundo dígito verificador está correto
+        if(!(secondVerifier == (cpf.charAt(10) - '0'))){
+            JOptionPane.showMessageDialog(null, "CPF invalido" , "Erro na Criação de Conta", JOptionPane.INFORMATION_MESSAGE);
+            return;
         }
         
         // Convirmar os dados

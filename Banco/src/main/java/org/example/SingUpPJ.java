@@ -324,52 +324,48 @@ public class SingUpPJ extends javax.swing.JPanel {
             return;
         }
         
-        String CPF_REGEX = "^\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}$|^\\d{11}$";
+        String CNPJ_REGEX = "^\\d{2}\\.\\d{3}\\.\\d{3}/\\d{4}\\-\\d{2}$|^\\d{14}$";
 
         // Verificar o formato usando regex
-        if (!Pattern.matches(CPF_REGEX, cpf)){
-            JOptionPane.showMessageDialog(null, "CPF invalido" , "Erro na Criação de Conta", JOptionPane.INFORMATION_MESSAGE);
+        if (!Pattern.matches(CNPJ_REGEX, cnpj)){
+            JOptionPane.showMessageDialog(null, "CNJP invalido" , "Erro na Criação de Conta", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
 
         // Remover caracteres especiais, se existirem
-        cpf = cpf.replaceAll("\\D", "");
+        cnpj = cnpj.replaceAll("\\D", "");
 
-        // Eliminar CPFs com todos os números iguais (e.g., "11111111111")
-        if (cpf.matches("(\\d)\\1{10}")) {
-            JOptionPane.showMessageDialog(null, "CPF invalido" , "Erro na Criação de Conta", JOptionPane.INFORMATION_MESSAGE);
+        // Eliminar CNPJs com todos os números iguais (e.g., "11111111111111")
+        if (cnpj.matches("(\\d)\\1{13}")){
+            JOptionPane.showMessageDialog(null, "CNJP invalido" , "Erro na Criação de Conta", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
 
         // Calcular o primeiro dígito verificador
+        int[] weights1 = {5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
         int sum = 0;
-        for (int i = 0; i < 9; i++) {
-            sum += (cpf.charAt(i) - '0') * (10 - i);
+        for (int i = 0; i < 12; i++) {
+            sum += (cnpj.charAt(i) - '0') * weights1[i];
         }
-        int firstVerifier = 11 - (sum % 11);
-        if (firstVerifier >= 10) {
-            firstVerifier = 0;
-        }
+        int firstVerifier = sum % 11 < 2 ? 0 : 11 - (sum % 11);
 
         // Verificar se o primeiro dígito verificador está correto
-        if (firstVerifier != (cpf.charAt(9) - '0')) {
-            JOptionPane.showMessageDialog(null, "CPF invalido" , "Erro na Criação de Conta", JOptionPane.INFORMATION_MESSAGE);
+        if (firstVerifier != (cnpj.charAt(12) - '0')){
+            JOptionPane.showMessageDialog(null, "CNJP invalido" , "Erro na Criação de Conta", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
 
         // Calcular o segundo dígito verificador
+        int[] weights2 = {6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
         sum = 0;
-        for (int i = 0; i < 10; i++) {
-            sum += (cpf.charAt(i) - '0') * (11 - i);
+        for (int i = 0; i < 13; i++) {
+            sum += (cnpj.charAt(i) - '0') * weights2[i];
         }
-        int secondVerifier = 11 - (sum % 11);
-        if (secondVerifier >= 10) {
-            secondVerifier = 0;
-        }
+        int secondVerifier = sum % 11 < 2 ? 0 : 11 - (sum % 11);
 
         // Verificar se o segundo dígito verificador está correto
-        if(!(secondVerifier == (cpf.charAt(10) - '0'))){
-            JOptionPane.showMessageDialog(null, "CPF invalido" , "Erro na Criação de Conta", JOptionPane.INFORMATION_MESSAGE);
+        if(!(secondVerifier == (cnpj.charAt(13) - '0'))){
+            JOptionPane.showMessageDialog(null, "CNJP invalido" , "Erro na Criação de Conta", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         

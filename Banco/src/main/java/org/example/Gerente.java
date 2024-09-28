@@ -3,8 +3,6 @@ package org.example;
 
 import org.example.Pacote.Transacao;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.*;
 
 public class Gerente extends Pessoa {

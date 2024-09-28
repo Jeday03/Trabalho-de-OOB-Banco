@@ -37,37 +37,33 @@ public abstract class Conta {
         this.titular = titular;
     }
 
-//    public void imprimeinfo() {
-//        System.out.println("Conta: " + idConta);
-//        System.out.println("Titular: " + titular.getNome());
-//        System.out.println("Saldo: " + saldo);
-//        System.out.println();
-//    }
-//
-//    public void imprimeTransacoes() {
-//        List<Transacao> transacoes = extrato.get(idConta);
-//        if (transacoes != null) {
-//            for (Transacao transacao : transacoes) {
-//                System.out.println("Seu nome: " + titular.getNome());
-//                System.out.println("Tipo: " + transacao.getTipo());
-//                System.out.println("Valor: " + transacao.getValor());
-//                System.out.println("Data: " + transacao.getData());
-//
-//                if (transacao.getTipo().equals("Transferência")) {
-//                    System.out.println("Autor: " + transacao.getAutor());
-//                    System.out.println("Remetente: " + transacao.getRemetente());
-//                }
-//                System.out.println();
-//            }
-//        }
-//    }
+    public void imprimeinfo() {
+        System.out.println("Conta: " + idConta);
+        System.out.println("Titular: " + titular.getNome());
+        System.out.println("Saldo: " + saldo);
+        System.out.println();
+    }
+
+    public void imprimeTransacoes() {
+        List<Transacao> transacoes = extrato.get(idConta);
+        if (transacoes != null) {
+            for (Transacao transacao : transacoes) {
+                System.out.println("Seu nome: " + titular.getNome());
+                System.out.println("Tipo: " + transacao.getTipo());
+                System.out.println("Valor: " + transacao.getValor());
+                System.out.println("Data: " + transacao.getData());
+
+                if (transacao.getTipo().equals("Transferência")) {
+                    System.out.println("Autor: " + transacao.getAutor());
+                    System.out.println("Remetente: " + transacao.getRemetente());
+                }
+                System.out.println();
+            }
+        }
+    }
 
     public double getSaldo() {
         return saldo;
-    }
-
-    public Pessoa getTitular() {
-        return titular;
     }
 
     protected void incrementaSaldo(Pessoa autor, double valor) {
@@ -79,6 +75,10 @@ public abstract class Conta {
             }
         }
         this.saldo += valor;
+    }
+
+    public Pessoa getTitular() {
+        return titular;
     }
 
     public boolean sacar(double valor) {
@@ -123,4 +123,6 @@ public abstract class Conta {
         }
         return verificaTransferencia(remetente, valor,valor);
     }
+
+
 }

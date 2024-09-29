@@ -1,13 +1,12 @@
 package org.example;
 
 
+import org.example.Pacote.Cliente;
 import org.example.Pacote.Conta;
+import org.example.Pacote.PJ;
 import org.example.Pacote.Transacao;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.*;
@@ -101,9 +100,52 @@ public class Gerente extends Pessoa {
 
         return emprestimos;
     }
-    public void editarConta(){
 
+    //Altera dados da conta. Recebe caminho do arquivo o id da conta e todos dados da conta para serem alterados.
+
+    public static void editarConta(String caminhoArquivo, int idConta, String nome, String telefone, String email, String senha, String documento, String endereco) {
+        // Carregar todas as pessoas
+        List<Pessoa> pessoas = ProcessarArquivos.carregarPessoas(caminhoArquivo);
+        boolean contaEncontrada = false;
+
+        // Percorrer a lista de pessoas e buscar pelo id da conta a ser editada
+        for (Pessoa pessoa : pessoas) {
+            if (pessoa instanceof Cliente) {
+                Cliente cliente = (Cliente) pessoa;
+                if (cliente.getId()==(idConta)) {
+                    contaEncontrada = true;
+
+                    // Atualiza os dados da pessoa com os novos valores
+                    cliente.setNome(nome);
+                    cliente.setTelefone(telefone);
+                    cliente.setEmail(email);
+                    cliente.setSenha(senha);
+
+                    if (cliente instanceof PF) {
+                        ((PF) cliente).setCpf(documento);
+                        cliente.setEndereco(endereco);
+                    } else if (cliente instanceof PJ) {
+                        ((PJ) cliente).setCnpj(documento);
+                        cliente.setEndereco(endereco);
+                    }
+
+                    break; // Sai do loop após encontrar e modificar a conta
+                }
+            }
+        }
+
+        if (!contaEncontrada) {
+            System.out.println("Conta com ID " + idConta + " não encontrada.");
+            return;
+        }
+
+        // Salvar a lista de pessoas com os dados atualizados
+        ProcessarArquivos.salvarPessoas(caminhoArquivo, pessoas);
+        System.out.println("Conta editada com sucesso!");
     }
+
+
+
     public void excluirConta(){
 
     }

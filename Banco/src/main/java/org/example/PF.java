@@ -19,4 +19,9 @@ public class PF extends Cliente {
     public void fecharConta() {
         System.out.println("Conta de Pessoa Física encerrada.");
     }
+
+    public void setCpf(String documento) {
+        this.cpf = documento;
+    }
 }
+

@@ -18,6 +18,9 @@ public abstract class Cliente extends Pessoa {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
@@ -30,7 +33,7 @@ public abstract class Cliente extends Pessoa {
     public boolean abrirConta(Conta conta){
         conta.setTitular(this);
         return true;
-    };
+    }
 
     public abstract void fecharConta();
 }

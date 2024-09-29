@@ -43,7 +43,6 @@ public class Main {
         }
         
         
-        
         //vou implementar a inteface a partir daqui
 
         // Cria o frame
@@ -60,5 +59,6 @@ public class Main {
         LoginFrame.pack();
         LoginFrame.setVisible(true);
         LoginFrame.setLocationRelativeTo(null);
+
     }
 }

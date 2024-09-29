@@ -14,18 +14,16 @@ public class Emprestimo {
     private Date data;
     private int prazo; //prazo em meses para pagamento
     private double taxaDeJuros;
-    private Pessoa pessoaAssociada;
     private int idConta;
 
 
-    public Emprestimo(double valor, Date data, Pessoa pessoaAssociada,int idConta, int prazo) {
+    public Emprestimo(double valor, Date data,int idConta, int prazo) {
         numEmprestimos ++;
         this.idEmprestimo = numEmprestimos;
         this.valor = valor;
         this.situacao = false;
         this.data = data;
         this.taxaDeJuros = 10.5;
-        this.pessoaAssociada = pessoaAssociada;
         this.idConta = idConta;
         this.prazo = prazo;
     }
@@ -68,4 +66,5 @@ public class Emprestimo {
     public Boolean getSituacao() {
         return situacao;
     }
+
 }

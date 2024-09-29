@@ -75,7 +75,7 @@ public class Gerente extends Pessoa {
     }
 
     // A partir de um IdConta retorna lista com todos emprestimos associados a esta conta.
-    public List<Emprestimo> visualizarEmprestimos(int idConta) {
+    public static List<Emprestimo> visualizarEmprestimos(int idConta) {
         List<Emprestimo> emprestimos = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(ARQUIVO_EMPRESTIMOS))) {
@@ -90,8 +90,7 @@ public class Gerente extends Pessoa {
 
                 // Verifica se o empréstimo é da conta fornecida
                 if (idContaArquivo == idConta) {
-                    // Substitua 'null' pelo objeto 'Pessoa' apropriado (pode ser um cliente) ou obtenha a pessoa associada de outra forma
-                    Emprestimo emprestimo = new Emprestimo(valor, new Date(), null, idContaArquivo, prazo);
+                    Emprestimo emprestimo = new Emprestimo(valor, new Date(), idContaArquivo, prazo);
                     emprestimos.add(emprestimo);
                 }
             }
@@ -99,8 +98,8 @@ public class Gerente extends Pessoa {
             System.out.println("Erro ao ler o arquivo CSV: " + e.getMessage());
         }
 
-        return emprestimos;
-    }
+    return emprestimos;
+}
     public void editarConta(){
 
     }

@@ -4,6 +4,7 @@
  */
 package org.example;
 
+import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -296,6 +297,8 @@ public class UserInterface extends javax.swing.JFrame{
         } else {
             System.out.println("O usuário cancelou a operação.");
         }
+        Emprestimo novoEmprestimo = new Emprestimo(pedidoDeEmprestimo, new Date(), idConta, 12);
+        novoEmprestimo.salvarEmCSV();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed

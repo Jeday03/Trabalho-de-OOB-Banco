@@ -2,6 +2,7 @@ package org.example.Pacote;
 import org.example.CSalario;
 import org.example.Pessoa;
 
+import java.time.LocalDate;
 import java.util.*;
 
 public abstract class Conta {
@@ -68,7 +69,7 @@ public abstract class Conta {
 
     protected void incrementaSaldo(Pessoa autor, double valor) {
         if (autor != null) {
-            Date data = new Date();
+            LocalDate data = LocalDate.now();
             List<Transacao> transacoes = extrato.get(idConta);
             if (transacoes != null) {
                 transacoes.add(new Transacao(valor, data, "Transferência", autor.getNome(), "Você"));
@@ -83,7 +84,7 @@ public abstract class Conta {
 
     public boolean sacar(double valor) {
         if (retira(valor)) {
-            Date data = new Date();
+            LocalDate data = LocalDate.now();
             List<Transacao> transacoes = extrato.get(idConta);
             if (transacoes != null) {
                 transacoes.add(new Transacao(-valor, data, "Saque", null, null));
@@ -104,7 +105,7 @@ public abstract class Conta {
     protected boolean verificaTransferencia(Conta remetente, double valor, double valorTransfere){
         if (retira(valor)) {
             remetente.incrementaSaldo(titular, valorTransfere);
-            Date data = new Date();
+            LocalDate data = LocalDate.now();
             List<Transacao> transacoes = extrato.get(idConta);
             if (transacoes != null) {
                 transacoes.add(new Transacao(-valor, data, "Transferência", "Você", remetente.getTitular().getNome()));

@@ -27,4 +27,8 @@ public class PJ extends Cliente {
     public void fecharConta() {
         System.out.println("Conta de Pessoa Jurídica encerrada.");
     }
+
+    public void setCnpj(String documento) {
+        this.cnpj = documento;
+    }
 }

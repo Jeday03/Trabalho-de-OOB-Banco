@@ -1,5 +1,6 @@
 package org.example.Pacote;
 import org.example.CSalario;
+import org.example.PF;
 import org.example.Pessoa;
 
 import java.time.LocalDate;
@@ -34,7 +35,7 @@ public abstract class Conta {
         return extrato;
     }
 
-    void setTitular(Pessoa titular) {
+    public void setTitular(Pessoa titular) {
         this.titular = titular;
     }
 
@@ -67,7 +68,7 @@ public abstract class Conta {
         return saldo;
     }
 
-    protected void incrementaSaldo(Pessoa autor, double valor) {
+    public void incrementaSaldo(Pessoa autor, double valor) {
         if (autor != null) {
             LocalDate data = LocalDate.now();
             List<Transacao> transacoes = extrato.get(idConta);
@@ -124,6 +125,13 @@ public abstract class Conta {
         }
         return verificaTransferencia(remetente, valor,valor);
     }
-
+    public int getIdTitular() {
+        if (titular instanceof PF) {
+            return ((PF) titular).getId();
+        } else if (titular instanceof PJ) {
+            return ((PJ) titular).getId();
+        }
+        return -1; // Caso o titular não seja nem PF nem PJ
+    }
 
 }

@@ -2,6 +2,7 @@ package org.example;
 import java.io.*;
 import java.util.*;
 
+import org.example.Pacote.Conta;
 import org.example.Pacote.PJ;
 public class ProcessarArquivos {
     public static void salvarPessoas(String caminhoArquivo, List<Pessoa> pessoas) {
@@ -120,5 +121,85 @@ public class ProcessarArquivos {
         String senhaArmazenada = loginMap.get(email);
         return senhaArmazenada != null && senhaArmazenada.equals(senha);
     }
-}
+    // Método para salvar contas em um arquivo CSV
+    public static void salvarContas(String caminhoArquivo, List<Conta> contas) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(caminhoArquivo))) {
+            for (Conta conta : contas) {
+                Pessoa titular = conta.getTitular();
+                String tipoPessoa = titular instanceof PF ? "PF" : "PJ";
+
+                bw.write(conta.getIdConta() + ";" + conta.getIdTitular() + ";" + tipoPessoa + ";" +
+                        titular.getNome() + ";" + titular.getEmail() + ";" +
+                        conta.getSaldo());  // Salva o saldo da conta
+                bw.newLine();
+            }
+            System.out.println("Contas salvas com sucesso!");
+        } catch (IOException e) {
+            System.err.println("Erro ao salvar contas: " + e.getMessage());
+        }
+    }
+
+    // Método para carregar contas de um arquivo CSV e associá-las ao titular
+
+
+        // Método para carregar contas de um arquivo CSV e associá-las ao titular
+        public static List<Conta> carregarContas(String caminhoArquivo, List<Pessoa> pessoas) {
+            List<Conta> contas = new ArrayList<>();
+            try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
+                String linha;
+                while ((linha = br.readLine()) != null) {
+                    String[] dados = linha.split(";");
+                    int idConta = Integer.parseInt(dados[0]);
+                    int idTitular = Integer.parseInt(dados[1]);
+                    String tipoConta = dados[2];  // Tipo de conta, por exemplo: "Corrente", "Poupança"
+                    double saldo = Double.parseDouble(dados[3]);
+
+                    // Encontrar a pessoa correspondente ao idTitular
+                    Pessoa titular = null;
+                    for (Pessoa pessoa : pessoas) {
+                        if (pessoa instanceof PF && ((PF) pessoa).getId() == idTitular) {
+                            titular = pessoa;
+                            break;
+                        } else if (pessoa instanceof PJ && ((PJ) pessoa).getId() == idTitular) {
+                            titular = pessoa;
+                            break;
+                        }
+                    }
+
+                    // Verifica se encontrou o titular
+                    if (titular != null) {
+                        Conta conta = null;
+
+                        // Instanciar o tipo correto de conta baseado no tipoConta
+                        switch (tipoConta) {
+                            case "Corrente":
+                                conta = new CCorrente();  // Exemplo para ContaCorrente
+                                break;
+                            case "Poupança":
+                                conta = new CPoupanca();  // Exemplo para ContaPoupança
+                                break;
+                            case "Salário":
+                                conta = new CSalario();  // Exemplo para Conta Salário
+                                break;
+                            default:
+                                System.err.println("Tipo de conta desconhecido: " + tipoConta);
+                        }
+
+                        if (conta != null) {
+                            conta.setTitular(titular);
+                            conta.incrementaSaldo(null, saldo);  // Ajusta o saldo da conta
+                            contas.add(conta);
+                        }
+                    }
+                }
+                System.out.println("Contas carregadas com sucesso!");
+            } catch (IOException e) {
+                System.err.println("Erro ao carregar contas: " + e.getMessage());
+            }
+            return contas;
+        }
+    }
+
+
+
 

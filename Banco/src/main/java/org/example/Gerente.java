@@ -97,14 +97,9 @@ public class Gerente extends Pessoa {
             System.out.println("Erro ao ler o arquivo CSV: " + e.getMessage());
         }
 
-<<<<<<< HEAD
     return emprestimos;
 }
-    public void editarConta(){
-=======
-        return emprestimos;
-    }
->>>>>>> 779d0a653cc0747e5ed4671f3004286c7b31bbb1
+
 
     //Altera dados da conta. Recebe caminho do arquivo o id da conta e todos dados da conta para serem alterados.
 

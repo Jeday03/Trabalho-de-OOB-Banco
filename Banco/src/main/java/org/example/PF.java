@@ -23,5 +23,6 @@ public class PF extends Cliente {
     public void setCpf(String documento) {
         this.cpf = documento;
     }
+
 }
 

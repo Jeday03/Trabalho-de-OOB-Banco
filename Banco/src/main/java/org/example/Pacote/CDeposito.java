@@ -1,5 +1,6 @@
 package org.example.Pacote;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +12,7 @@ public class CDeposito extends Conta {
     public boolean depositar(double valor) {
         if (valor > 0) {
             incrementaSaldo(null, valor); // Atualizar o saldo
-            Date data = new Date();
+            LocalDate data = LocalDate.now();
             // Adicionar transação ao extrato
             List<Transacao> transacoes = getExtrato().get(getIdConta());
             if (transacoes != null) {

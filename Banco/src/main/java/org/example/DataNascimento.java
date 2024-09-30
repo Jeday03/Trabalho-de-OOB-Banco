@@ -16,10 +16,6 @@ public class DataNascimento {
         throw new DataNascimentoException();
     }
 
-    public String getData() {
-        return data;
-    }
-
     public int getIdade() {
         LocalDate dataAtual = LocalDate.now();
         int dia = dataAtual.getDayOfMonth();
@@ -42,5 +38,10 @@ public class DataNascimento {
                 return ano-anor-1;
         }
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        return data;
     }
 }

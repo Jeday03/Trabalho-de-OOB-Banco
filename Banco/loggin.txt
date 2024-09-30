@@ -1,3 +1,0 @@
-felipe@gmail.com;1234
-claudio@gmail.com;1234
-marcos@gmail.com;1234

@@ -1,13 +1,13 @@
 package org.example;
 
 import javax.swing.*;
-import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Login extends javax.swing.JPanel {
 
     public Login() {
         initComponents();
-        initListeners(); // Inicializa os listeners aqui
     }
 
     @SuppressWarnings("unchecked")
@@ -24,7 +24,8 @@ public class Login extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        jButtonCliente = new javax.swing.JButton();
+        jButtonGerente = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
 
@@ -85,22 +86,37 @@ public class Login extends javax.swing.JPanel {
         jLabel1.setText("LOGIN");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel2.setText("Email");
+        jLabel2.setText("CPF");
 
         jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel3.setText("Senha");
 
-        jButton1.setBackground(new java.awt.Color(0, 102, 102));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Login");
+        jButtonCliente.setBackground(new java.awt.Color(0, 102, 102));
+        jButtonCliente.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonCliente.setText("Entrar como Cliente");
+
+        jButtonGerente.setBackground(new java.awt.Color(0, 102, 102));
+        jButtonGerente.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonGerente.setText("Entrar como Gerente");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jLabel4.setText("Não tenho uma conta");
 
         jButton3.setForeground(new java.awt.Color(51, 153, 255));
         jButton3.setText("Criar uma conta");
+
+        jButton3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Abrir a tela de Cadastro
+                Cadastro cadastro = new Cadastro();
+                cadastro.setVisible(true); // Exibir a nova janela de cadastro
+                ((JFrame) SwingUtilities.getWindowAncestor(Login.this)).dispose(); // Fechar a tela de Login
+            }
+        });
+
 
         javax.swing.GroupLayout DireitaLayout = new javax.swing.GroupLayout(Direita);
         Direita.setLayout(DireitaLayout);
@@ -113,7 +129,6 @@ public class Login extends javax.swing.JPanel {
                         .addGroup(DireitaLayout.createSequentialGroup()
                                 .addGap(48, 48, 48)
                                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                 .addComponent(jLabel2)
                                                 .addComponent(jTextField1)
@@ -122,7 +137,11 @@ public class Login extends javax.swing.JPanel {
                                                 .addGroup(DireitaLayout.createSequentialGroup()
                                                         .addComponent(jLabel4)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(jButton3))))
+                                                        .addComponent(jButton3)))
+                                        .addGroup(DireitaLayout.createSequentialGroup()
+                                                .addComponent(jButtonCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jButtonGerente, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addContainerGap(39, Short.MAX_VALUE))
         );
         DireitaLayout.setVerticalGroup(
@@ -139,7 +158,9 @@ public class Login extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(28, 28, 28)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jButtonCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButtonGerente, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(39, 39, 39)
                                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel4)
@@ -162,44 +183,11 @@ public class Login extends javax.swing.JPanel {
         );
     }
 
-    private void initListeners() {
-        jButton3.addActionListener(e -> mostrarDialogoConta());
-    }
-
-    private void mostrarDialogoConta() {
-        String[] opcoes = {"Pessoa Física", "Pessoa Jurídica"};
-        int resposta = JOptionPane.showOptionDialog(this,
-                "Selecione o tipo de conta:",
-                "Criar Conta",
-                JOptionPane.DEFAULT_OPTION,
-                JOptionPane.INFORMATION_MESSAGE,
-                null,
-                opcoes,
-                opcoes[0]);
-
-        if (resposta == 0) { // Se "Pessoa Física" foi selecionado
-            mostrarCadastroPF();
-        } else if (resposta == 1) {
-            // Aqui você pode adicionar a lógica para "Pessoa Jurídica", se necessário
-            JOptionPane.showMessageDialog(this, "Funcionalidade de Pessoa Jurídica não implementada.");
-        }
-    }
-
-    private void mostrarCadastroPF() {
-        // Cria uma nova janela para a tela de CadastroPF
-        JFrame cadastroFrame = new JFrame("Cadastro Pessoa Física");
-        CadastroPF cadastroPF = new CadastroPF(); // Certifique-se de ter a classe CadastroPF implementada
-        cadastroFrame.add(cadastroPF);
-        cadastroFrame.setSize(400, 300);
-        cadastroFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        cadastroFrame.setLocationRelativeTo(null); // Centraliza a janela
-        cadastroFrame.setVisible(true);
-    }
-
     // Variables declaration - do not modify
     private javax.swing.JPanel Direita;
     private javax.swing.JPanel Esquerda;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonCliente;
+    private javax.swing.JButton jButtonGerente;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

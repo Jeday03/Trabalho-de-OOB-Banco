@@ -1,7 +1,4 @@
-package org.example.Pacote;
-import org.example.CSalario;
-import org.example.PF;
-import org.example.Pessoa;
+package org.example;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -14,6 +11,10 @@ public abstract class Conta {
 
     // Map para armazenar o extrato por idConta
     private static Map<Integer, List<Transacao>> extrato = new HashMap<>();
+
+    public void setTitular(Cliente titular) {
+        this.titular = titular;
+    }
 
     protected Conta() {
         numContas++;
@@ -35,14 +36,6 @@ public abstract class Conta {
         return extrato;
     }
 
-    public void setTitular(Cliente titular) {
-        this.titular = titular;
-    }
-
-    public double getSaldo() {
-        return saldo;
-    }
-
     public void incrementaSaldo(Cliente autor, double valor) {
         if (autor != null) {
             LocalDate data = LocalDate.now();
@@ -52,10 +45,6 @@ public abstract class Conta {
             }
         }
         this.saldo += valor;
-    }
-
-    public Cliente getTitular() {
-        return titular;
     }
 
     public boolean sacar(double valor) {
@@ -84,7 +73,7 @@ public abstract class Conta {
             LocalDate data = LocalDate.now();
             List<Transacao> transacoes = extrato.get(idConta);
             if (transacoes != null) {
-                transacoes.add(new Transacao(-valor, data, "Transferência", "Você", remetente.getTitular().getNome()));
+                transacoes.add(new Transacao(-valor, data, "Transferência", "Você", remetente.titular.getNome()));
             }
             return true;
         }
@@ -92,13 +81,21 @@ public abstract class Conta {
     }
 
     public boolean transferir(Conta remetente, double valor) {
-        if (remetente instanceof CSalario) {
-            if (this.getTitular() instanceof PJ) {
-                return verificaTransferencia(remetente, valor,valor);
-            }
-            return false;
-        }
         return verificaTransferencia(remetente, valor,valor);
+    }
+
+    public boolean depositar(double valor) {
+        if (valor > 0) {
+            incrementaSaldo(null, valor); // Atualizar o saldo
+            LocalDate data = LocalDate.now();
+            // Adicionar transação ao extrato
+            List<Transacao> transacoes = getExtrato().get(getIdConta());
+            if (transacoes != null) {
+                transacoes.add(new Transacao(valor, data, "Depósito", null, null));
+            }
+            return true;
+        }
+        return false;
     }
 
 }

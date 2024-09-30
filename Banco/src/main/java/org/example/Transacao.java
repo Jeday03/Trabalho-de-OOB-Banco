@@ -1,6 +1,4 @@
-package org.example.Pacote;
-import java.io.FileWriter;
-import java.io.IOException;
+package org.example;
 import java.time.LocalDate;
 
 public class Transacao {

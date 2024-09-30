@@ -2,15 +2,14 @@ package org.example;
 
 public class CPF {
     private String cpf;
+
     private CPF(String cpf) {
         this.cpf = cpf;
     }
 
-    public String getCpf() {
-        return cpf;
-    }
 
-    public static CPF parser(String cpf) throws CPFException {
+    public static CPF parser(String cpf) throws CPFException, FormatoException {
+        String rcpf = cpf;
         if(cpf.matches("^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$")) {
             cpf = cpf.replaceAll("[^0-9]", "");
 
@@ -37,8 +36,14 @@ public class CPF {
             if(Character.getNumericValue(cpf.charAt(10))!=digito2)
                 throw new CPFException();
 
-            return new CPF(cpf);
+
+            return new CPF(rcpf);
         }
-        throw new CPFException();
+        throw new FormatoException();
+    }
+
+    @Override
+    public String toString() {
+        return cpf;
     }
 }

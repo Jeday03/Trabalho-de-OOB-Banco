@@ -1,9 +1,22 @@
 package org.example;
-import javax.swing.JFrame;
+import javax.swing.*;
+import java.io.IOException;
+import java.util.List;
 
 
 public class Main {
     public static void main(String[] args) {
+            ClienteManager clienteManager = new ClienteManager();
+
+            try {
+                List<Cliente> clientes = clienteManager.carregarClientes("clientes.txt");
+                for (Cliente cliente : clientes) {
+                    System.out.println(cliente); // Imprime ou manipula o cliente como desejar
+                }
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Erro ao carregar clientes: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+
         JFrame frame = new JFrame("Login");
 
         // Define o conteúdo do JFrame como o painel de login

@@ -1,17 +1,17 @@
 package org.example.Pacote;
 
-import org.example.CSalario;
+import org.example.*;
 
 public class PJ extends Cliente {
-    private String cnpj;
+    private CNPJ cnpj;
 
-    public PJ(String nome, String telefone, String email, String senha, String endereco, String cnpj) {
-        super(nome, telefone, email, senha, endereco);
+    public PJ(String nome, Telefone telefone, Email email, String senha, DataNascimento dataNascimento, CNPJ cnpj) {
+        super(nome, telefone, email, senha, dataNascimento);
         this.cnpj = cnpj;
     }
 
     public String getCnpj() {
-        return cnpj;
+        return cnpj.getCnpj();
     }
 
     @Override
@@ -21,14 +21,5 @@ public class PJ extends Cliente {
         }
         conta.setTitular(this);
         return true;
-    }
-
-    @Override
-    public void fecharConta() {
-        System.out.println("Conta de Pessoa Jurídica encerrada.");
-    }
-
-    public void setCnpj(String documento) {
-        this.cnpj = documento;
     }
 }

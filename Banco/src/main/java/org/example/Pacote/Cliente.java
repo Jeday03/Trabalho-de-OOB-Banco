@@ -1,39 +1,48 @@
 package org.example.Pacote;
 
+import org.example.DataNascimento;
+import org.example.Email;
 import org.example.Pessoa;
+import org.example.Telefone;
 
 public abstract class Cliente extends Pessoa {
     private static int numClientes;
     private int id;
-    private String endereco;
+    private DataNascimento dataNascimento;
+    private String nome;
+    private Telefone telefone;
 
-    public Cliente(String nome, String telefone, String email, String senha, String endereco) {
-        super(nome, telefone, email, senha);
+    public Cliente(String nome, Telefone telefone, Email email, String senha, DataNascimento dataNascimento) {
+        super(email, senha);
+        this.nome = nome;
+        this.telefone = telefone;
+        this.dataNascimento = dataNascimento;
         numClientes++;
         id = numClientes;
-        this.endereco = endereco;
+    }
+
+    public void setTelefone(Telefone telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getDataNascimento() {
+        return dataNascimento.getData();
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getTelefone() {
+        return telefone.getTelefone();
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-    public String getEndereco() {
-        return endereco;
-    }
-
-
     public boolean abrirConta(Conta conta){
         conta.setTitular(this);
         return true;
     }
-
-    public abstract void fecharConta();
 }

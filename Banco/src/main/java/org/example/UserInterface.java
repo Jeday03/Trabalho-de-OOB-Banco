@@ -25,7 +25,7 @@ public class UserInterface extends javax.swing.JFrame{
         initComponents();
     }
     /*
-    // Método para atualizar a interface com os dados da conta
+    // Metodo para atualizar a interface com os dados da conta
     private void atualizarInterface() {
         // Atualiza o label com o saldo da conta
         jLabel1.setText(String.format("R$ %.2f", conta.getSaldo())); // Supondo que você tenha um método getSaldo() na classe Conta

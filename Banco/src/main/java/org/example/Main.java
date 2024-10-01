@@ -14,12 +14,10 @@ public class Main {
         try {
             contas = contaManager.carregarContas("contas.txt");
 
-            // Verificando se as contas foram criadas corretamente
+            //Testa Extrato
             for (Conta conta : contas) {
-                System.out.println("Conta criada: " + conta.getClass().getSimpleName());
-                System.out.println("Titular: " + conta.getTitular().getNome());
-                System.out.println("Saldo: " + conta.getSaldo());
-                System.out.println("-----------------------");
+                conta.salvarExtratoEmArquivo("extrato.txt");
+
             }
         } catch (IOException e) {
             System.err.println("Erro ao carregar contas: " + e.getMessage());
@@ -69,5 +67,7 @@ public class Main {
 
         // Torna a janela visível
         frame.setVisible(true);
+
+
     }
 }

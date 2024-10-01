@@ -42,15 +42,16 @@ public class Main {
         JFrame frame = new JFrame("Login");
         Login loginPanel = new Login(contaManager, contas,gerente); // Passa o gerenciador e as contas
         frame.setContentPane(loginPanel);
-        Conta conta=contas.getFirst();
-        try {
-            conta.depositar(1000);
-            conta.sacar(2800);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
 
-        System.out.println("SALDO: "+conta.getSaldo());
+//        TESTE SACAR E DEPOSITAR
+//        Conta conta=contas.getFirst();
+//        try {
+//            conta.depositar(1000);
+//            conta.sacar(2800);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//        System.out.println("SALDO: "+conta.getSaldo());
 
         // Define tamanho da janela
         frame.setSize(800, 500);

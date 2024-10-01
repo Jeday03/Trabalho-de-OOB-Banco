@@ -27,7 +27,14 @@ public class Login extends javax.swing.JPanel {
                 String cpf = jTextField1.getText();
                 String senha = new String(jPasswordField1.getPassword());
                 if (validarLogin(cpf, senha, true)) { // true indica que estamos validando um cliente
-                    // Aqui você pode abrir a tela do cliente
+                    UserInterface painelDoUsuario = new UserInterface(); 
+
+                    painelDoUsuario.setSize(800, 500); 
+                    painelDoUsuario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+                    painelDoUsuario.setLocationRelativeTo(null);
+                    painelDoUsuario.setVisible(true); 
+                    ((JFrame) SwingUtilities.getWindowAncestor(Login.this)).dispose(); // Fechar a tela de Login
+
                     JOptionPane.showMessageDialog(Login.this, "Login de cliente bem-sucedido!");
                 } else {
                     JOptionPane.showMessageDialog(Login.this, "CPF ou senha inválidos!", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -41,7 +48,21 @@ public class Login extends javax.swing.JPanel {
                 String cpf = jTextField1.getText();
                 String senha = new String(jPasswordField1.getPassword());
                 if (validarLogin(cpf, senha, false)) { // false indica que estamos validando um gerente
-                    // Aqui você pode abrir a tela do gerente
+                    JFrame frame = new JFrame("Interface do Gerente");
+            frame.setSize(800, 500);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+            // Adiciona o painel de login
+            InterfaceGerente loginPanel = new InterfaceGerente();
+            frame.setContentPane(loginPanel);
+
+            // Centraliza a janela na tela
+            frame.setLocationRelativeTo(null);
+
+            // Torna a janela visível
+            frame.setVisible(true);
+           ((JFrame) SwingUtilities.getWindowAncestor(Login.this)).dispose(); // Fechar a tela de Login
+
                     JOptionPane.showMessageDialog(Login.this, "Login de gerente bem-sucedido!");
                 } else {
                     JOptionPane.showMessageDialog(Login.this, "CPF ou senha inválidos!", "Erro", JOptionPane.ERROR_MESSAGE);

@@ -1,6 +1,7 @@
 package org.example;
 
 import javax.swing.*;
+import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.util.List;
 
@@ -42,6 +43,20 @@ public class Main {
         JFrame frame = new JFrame("Login");
         Login loginPanel = new Login(contaManager, contas,gerente); // Passa o gerenciador e as contas
         frame.setContentPane(loginPanel);
+        //teste editar conta
+
+        try{
+            Telefone telefone=Telefone.parser("(32)99141-9141");
+            DataNascimento dataNascimento= DataNascimento.parser("20/05/2000");
+            CPF cpf= CPF.parser("110.147.936-10");
+            Cliente cliente2=new Cliente("felipe",telefone,"1010",dataNascimento,cpf);
+            gerente.editarConta("123.456.789-09","contas.txt",cliente2);
+        }catch (TelefoneException | DataNascimentoException | CPFException e ){
+            e.getMessage();
+        } catch (FormatoException e) {
+            throw new RuntimeException(e);
+        }
+
 
         // Define tamanho da janela
         frame.setSize(800, 500);

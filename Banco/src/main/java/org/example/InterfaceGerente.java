@@ -340,7 +340,7 @@ public class InterfaceGerente extends javax.swing.JPanel {
 
         String arquivoCSV = "contas.txt"; // Substitua pelo caminho real do seu arquivo CSV
 
-        boolean sucesso = Gerente.editarConta(cpf, arquivoCSV, novosDados);
+        boolean sucesso = Gerente.editarConta(cpf, novosDados);
 
         if (sucesso) {
             JOptionPane.showMessageDialog(null, "Conta editada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);

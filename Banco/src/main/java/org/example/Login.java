@@ -29,7 +29,9 @@ public class Login extends javax.swing.JPanel {
 
         // Itera sobre cada conta para encontrar a que corresponde ao CPF fornecido
         for (Conta conta : contas) {
-            if (conta.getTitular().getCpf().equals(cpf)) {
+            
+            //return conta;
+            if (conta.getTitular().getCpfString().equals(cpf)) {
                 return conta; // Retorna a conta correspondente ao CPF
             }
         }

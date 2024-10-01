@@ -3,6 +3,7 @@ package org.example;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -22,27 +23,56 @@ public class Login extends javax.swing.JPanel {
         configurarBotoes();
     }
 
+    public static Conta carregarContaPorCpf(String cpf, String arquivo) throws IOException {
+        // Carrega todas as contas do arquivo
+        List<Conta> contas = ContaManager.carregarContas(arquivo);
 
-    private void configurarBotoes() {
-        jButtonCliente.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String cpf = jTextField1.getText();
-                String senha = new String(jPasswordField1.getPassword());
-                if (validarLogin(cpf, senha, true)) { // true indica que estamos validando um cliente
-                    UserInterface painelDoUsuario = new UserInterface(); 
-
-                    painelDoUsuario.setSize(800, 500); 
-                    painelDoUsuario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-                    painelDoUsuario.setLocationRelativeTo(null);
-                    painelDoUsuario.setVisible(true); 
-                    ((JFrame) SwingUtilities.getWindowAncestor(Login.this)).dispose(); // Fechar a tela de Login
-
-                } else {
-                    JOptionPane.showMessageDialog(Login.this, "CPF ou senha inválidos!", "Erro", JOptionPane.ERROR_MESSAGE);
-                }
+        // Itera sobre cada conta para encontrar a que corresponde ao CPF fornecido
+        for (Conta conta : contas) {
+            if (conta.getTitular().getCpf().equals(cpf)) {
+                return conta; // Retorna a conta correspondente ao CPF
             }
-        });
+        }
+
+        // Retorna null se a conta não for encontrada
+        return null;
+    }
+    
+    
+    private void configurarBotoes() {
+    jButtonCliente.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String cpf = jTextField1.getText();
+            String senha = new String(jPasswordField1.getPassword());
+            if (validarLogin(cpf, senha, true)) { // true indica que estamos validando um cliente
+                
+                try {
+                    // Aqui você deve passar o arquivo onde as contas estão armazenadas
+                    Conta contaAtual = carregarContaPorCpf(cpf, "contas.txt");
+
+                    if (contaAtual != null) {
+                        UserInterface painelDoUsuario = new UserInterface(contaAtual); 
+
+                        painelDoUsuario.setSize(800, 500); 
+                        painelDoUsuario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+                        painelDoUsuario.setLocationRelativeTo(null);
+                        painelDoUsuario.setVisible(true); 
+                        ((JFrame) SwingUtilities.getWindowAncestor(Login.this)).dispose(); // Fechar a tela de Login
+                    } else {
+                        JOptionPane.showMessageDialog(Login.this, "Conta não encontrada!", "Erro", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(Login.this, "Erro ao carregar contas: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(Login.this, "CPF ou senha inválidos!", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    });
+
 
         jButtonGerente.addActionListener(new ActionListener() {
             @Override

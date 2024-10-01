@@ -17,13 +17,23 @@ import javax.swing.SwingUtilities;
  */
 public class UserInterface extends javax.swing.JFrame{
 
+    private static Conta conta;
+
     /**
      * Creates new form UserInterface
      */
 
-    public UserInterface() {
+    public UserInterface(Conta conta) {
+        this.conta = conta;
         initComponents();
+        atualizarInterface(); // Atualiza a interface com os dados da conta
+    
     }
+    
+    private void atualizarInterface() {
+    jLabel1.setText(String.format("R$ %.2f", conta.getSaldo()));
+    // Atualizar outros componentes, como extrato
+}
     /*
     // Metodo para atualizar a interface com os dados da conta
     private void atualizarInterface() {
@@ -321,7 +331,12 @@ public class UserInterface extends javax.swing.JFrame{
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        StringBuilder extratoStr = new StringBuilder("Extrato:\n");
+        /*for (String movimento : conta.getExtrato()) {
+            extratoStr.append(movimento).append("\n");
+        }*/
+        JOptionPane.showMessageDialog(this, extratoStr.toString(), "Extrato", JOptionPane.INFORMATION_MESSAGE);
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -378,7 +393,7 @@ public class UserInterface extends javax.swing.JFrame{
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UserInterface().setVisible(true);
+                new UserInterface(conta).setVisible(true);
             }
         });
     }

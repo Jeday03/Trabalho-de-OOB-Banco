@@ -1,6 +1,6 @@
-Extrato para CPF: 987.654.321-00
-
 Extrato para CPF: 123.456.789-09
 
 Extrato para CPF: 111.444.777-35
+
+Extrato para CPF: 987.654.321-00
 

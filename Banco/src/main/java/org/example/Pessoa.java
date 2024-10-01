@@ -1,7 +1,7 @@
     package org.example;
 
     public abstract class Pessoa {
-        private CPF cpf;
+        CPF cpf;
         private String senha;
 
 

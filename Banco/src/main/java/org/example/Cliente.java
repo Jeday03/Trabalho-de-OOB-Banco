@@ -32,4 +32,24 @@ public class Cliente extends Pessoa{
         conta.setTitular(this);
         return true;
     }
+
+    public void setDataNascimento(DataNascimento dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setTelefone(Telefone telefone) {
+        this.telefone = telefone;
+    }
+
+    public DataNascimento getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public Telefone getTelefone() {
+        return telefone;
+    }
 }

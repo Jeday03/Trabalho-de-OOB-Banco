@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ContaManager {
 
-    public List<Conta> carregarContas(String arquivo) throws IOException {
+    public static List<Conta> carregarContas(String arquivo) throws IOException {
         List<Conta> contas = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(arquivo))) {

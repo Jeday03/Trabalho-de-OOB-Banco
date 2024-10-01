@@ -17,4 +17,12 @@
         public String getSenha() {
             return senha;
         }
+
+        public void setCpf(CPF cpf) {
+            this.cpf = cpf;
+        }
+
+        public void setSenha(String senha) {
+            this.senha = senha;
+        }
     }

@@ -343,8 +343,41 @@ public class SingUp extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!", "Cadastro Concluído", JOptionPane.INFORMATION_MESSAGE);
 
             // Abre a tela de login após o cadastro
+            ContaManager contaManager = new ContaManager();
+            List<Conta> contas;
+
+            try {
+                contas = contaManager.carregarContas("contas.txt");
+
+                // Verificando se as contas foram criadas corretamente
+                for (Conta conta1 : contas) {
+                    System.out.println("Conta criada: " + conta1.getClass().getSimpleName());
+                    System.out.println("Titular: " + conta1.getTitular().getNome());
+                    System.out.println("Saldo: " + conta1.getSaldo());
+                    System.out.println("-----------------------");
+                }
+            } catch (IOException e) {
+                System.err.println("Erro ao carregar contas: " + e.getMessage());
+                return; // Sai do metodo caso ocorra um erro
+            }
+
+            GerenteManager gerenteManager = new GerenteManager();
+            Gerente gerente=null;
+            try {
+                gerenteManager.carregarGerente("gerente.txt");
+                gerente = gerenteManager.getGerente();
+                if (gerente != null) {
+                    System.out.println("Gerente carregado:");
+                    System.out.println("CPF: " + gerente.getCpf());
+                    // Aqui você pode verificar a senha, etc.
+                }
+            } catch (IOException e) {
+                System.err.println("Erro ao carregar gerente: " + e.getMessage());
+            }
+
             JFrame LoginFrame = new JFrame("Login");
-            Login loginPanel = new Login();
+            Login loginPanel = new Login(contaManager, contas,gerente); // Passa o gerenciador e as contas
+            LoginFrame.setContentPane(loginPanel);
             LoginFrame.setContentPane(loginPanel);
             LoginFrame.setSize(800, 500);
             LoginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

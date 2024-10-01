@@ -22,7 +22,7 @@ public class Main {
             }
         } catch (IOException e) {
             System.err.println("Erro ao carregar contas: " + e.getMessage());
-            return; // Sai do método caso ocorra um erro
+            return; // Sai do metodo caso ocorra um erro
         }
 
         GerenteManager gerenteManager = new GerenteManager();

@@ -100,7 +100,8 @@ public class InterfaceGerente extends javax.swing.JPanel {
         campoTelefone = new javax.swing.JTextField();
         campoTelefone2 = new javax.swing.JTextField();
 
-        jPanel1.setMinimumSize(new java.awt.Dimension(800, 500));
+        jPanel1.setMinimumSize(new java.awt.Dimension(800, 600));
+        jPanel1.setPreferredSize(new java.awt.Dimension(800, 600));
         jPanel1.setLayout(null);
 
         Esquerda.setBackground(new java.awt.Color(0, 102, 102));
@@ -332,29 +333,8 @@ public class InterfaceGerente extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jTable1.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                int row = jTable1.getSelectedRow(); // Obtem a linha selecionada
-                if (row != -1) {
-                    // Supondo que você tenha um modelo de tabela com colunas na ordem correta
-                    String cpf = jTable1.getValueAt(row, 0).toString();
-                    String nome = jTable1.getValueAt(row, 1).toString();
-                    String telefone = jTable1.getValueAt(row, 2).toString();
-                    String senha = jTable1.getValueAt(row, 3).toString();
-                    String dataNascimento = jTable1.getValueAt(row, 4).toString();
-
-                    // Atualiza os campos de texto
-                    campoCPF.setText(cpf);
-                    campoNome.setText(nome);
-                    campoTelefone.setText(telefone);
-                    campoSenha.setText(senha);
-                    campoTelefone2.setText(dataNascimento);
-                }
-            }
-        });
-
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

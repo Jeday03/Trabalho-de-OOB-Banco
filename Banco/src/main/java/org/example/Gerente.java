@@ -7,12 +7,13 @@ import java.io.IOException;
 import java.util.List;
 
 public class Gerente extends Pessoa {
-
+    private String arquivoCSV;
     public Gerente(CPF cpf, String senha) {
         super(cpf, senha);
+        this.arquivoCSV = "contas.txt";
     }
-
-    public boolean editarConta(String cpf, String arquivoCSV, Cliente novosDados) {
+    //Recebe os dados de um cliente e sobreescreve no arquivo com o mesmo cpf.
+    public boolean editarConta(String cpf, Cliente novosDados) {
         try {
             // Carregar todas as contas do arquivo CSV
             List<Conta> contas = ContaManager.carregarContas(arquivoCSV);
@@ -37,6 +38,28 @@ public class Gerente extends Pessoa {
             return false; // Não encontrou a conta com o CPF informado
         } catch (IOException e) {
             System.err.println("Erro ao editar a conta: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean excluirConta(String cpf, String arquivoCSV) {
+        try {
+            // Carregar todas as contas do arquivo CSV
+            List<Conta> contas = ContaManager.carregarContas(arquivoCSV);
+
+            // Procurar a conta que possui o CPF correspondente e removê-la
+            boolean contaRemovida = contas.removeIf(conta -> conta.getTitular().getCpf().toString().equals(cpf));
+
+            if (contaRemovida) {
+                // Sobrescrever o arquivo CSV com as contas atualizadas (sem a conta removida)
+                salvarContasNoArquivo(contas, arquivoCSV);
+                return true; // Conta removida com sucesso
+            } else {
+                System.out.println("Conta não encontrada.");
+                return false; // Não encontrou a conta com o CPF informado
+            }
+        } catch (IOException e) {
+            System.err.println("Erro ao excluir a conta: " + e.getMessage());
             return false;
         }
     }

@@ -1,16 +1,17 @@
 package org.example;
+
 import javax.swing.*;
 import java.io.IOException;
 import java.util.List;
-
 
 public class Main {
     public static void main(String[] args) {
 
         ContaManager contaManager = new ContaManager();
+        List<Conta> contas;
 
         try {
-            List<Conta> contas = contaManager.carregarContas("contas.txt");
+            contas = contaManager.carregarContas("contas.txt");
 
             // Verificando se as contas foram criadas corretamente
             for (Conta conta : contas) {
@@ -21,14 +22,11 @@ public class Main {
             }
         } catch (IOException e) {
             System.err.println("Erro ao carregar contas: " + e.getMessage());
+            return; // Sai do método caso ocorra um erro
         }
 
-
-
-    JFrame frame = new JFrame("Login");
-
-        // Define o conteúdo do JFrame como o painel de login
-        Login loginPanel = new Login();
+        JFrame frame = new JFrame("Login");
+        Login loginPanel = new Login(contaManager, contas); // Passa o gerenciador e as contas
         frame.setContentPane(loginPanel);
 
         // Define tamanho da janela

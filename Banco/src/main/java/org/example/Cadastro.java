@@ -139,7 +139,7 @@ public class Cadastro extends JFrame {
     }
 
     private boolean cpfJaCadastrado(String cpfStr) {
-        // Lógica para verificar se o CPF já está cadastrado
+        // Lógica para verificar se o CPF já está cadastrado em "contas.txt"
         try (BufferedReader reader = new BufferedReader(new FileReader("contas.txt"))) {
             String linha;
             while ((linha = reader.readLine()) != null) {
@@ -151,8 +151,23 @@ public class Cadastro extends JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return false;
+
+        // Lógica para verificar se o CPF já está cadastrado em "gerente.txt"
+        try (BufferedReader reader = new BufferedReader(new FileReader("gerente.txt"))) {
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+                String[] dados = linha.split(","); // Supondo que os dados estão separados por vírgula
+                if (dados.length > 0 && dados[0].equals(cpfStr)) { // CPF é o primeiro campo
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return false; // CPF não encontrado em nenhum dos arquivos
     }
+
 
     private void salvarClienteEmArquivo(Cliente cliente, Conta conta) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("contas.txt", true))) {

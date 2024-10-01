@@ -3,16 +3,49 @@ package org.example;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class Login extends javax.swing.JPanel {
 
-    public Login() {
+    private ContaManager contaManager; // Gerenciador de contas
+    private List<Conta> contas; // Lista de contas
+
+    public Login(ContaManager contaManager, List<Conta> contas) {
+        this.contaManager = contaManager;
+        this.contas = contas;
         initComponents();
+        configurarBotoes();
+    }
+
+    private void configurarBotoes() {
+        jButtonCliente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String cpf = jTextField1.getText();
+                String senha = new String(jPasswordField1.getPassword());
+                if (validarLogin(cpf, senha)) {
+                    // Aqui você pode abrir a tela do cliente
+                    JOptionPane.showMessageDialog(Login.this, "Login bem-sucedido!");
+                } else {
+                    JOptionPane.showMessageDialog(Login.this, "CPF ou senha inválidos!", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+        // Você pode adicionar a lógica para o botão do gerente aqui, se necessário
+    }
+
+    private boolean validarLogin(String cpf, String senha) {
+        for (Conta conta : contas) {
+            if (conta.getTitular().getCpf().toString().equals(cpf) && conta.getTitular().getSenha().equals(senha)) {
+                return true; // CPF e senha válidos
+            }
+        }
+        return false; // CPF ou senha inválidos
     }
 
     @SuppressWarnings("unchecked")
     private void initComponents() {
-
         jPanel1 = new javax.swing.JPanel();
         Esquerda = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -117,7 +150,6 @@ public class Login extends javax.swing.JPanel {
             }
         });
 
-
         javax.swing.GroupLayout DireitaLayout = new javax.swing.GroupLayout(Direita);
         Direita.setLayout(DireitaLayout);
         DireitaLayout.setHorizontalGroup(
@@ -153,37 +185,41 @@ public class Login extends javax.swing.JPanel {
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
+                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
                                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButtonCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButtonGerente, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(39, 39, 39)
-                                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jButton3))
-                                .addContainerGap(78, Short.MAX_VALUE))
+                                        .addComponent(jButtonCliente)
+                                        .addComponent(jButtonGerente))
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton3)
+                                .addContainerGap(151, Short.MAX_VALUE))
         );
 
-        jPanel1.add(Direita);
-        Direita.setBounds(400, 0, 400, 500);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(Esquerda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Direita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Esquerda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Direita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        add(jPanel1);
+        jPanel1.setBounds(0, 0, 800, 500);
     }
 
-    // Variables declaration - do not modify
+    // Variáveis de classe
     private javax.swing.JPanel Direita;
     private javax.swing.JPanel Esquerda;
     private javax.swing.JButton jButtonCliente;
@@ -199,5 +235,4 @@ public class Login extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
-    // End of variables declaration
 }

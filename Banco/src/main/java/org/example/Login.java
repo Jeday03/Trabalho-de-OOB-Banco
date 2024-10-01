@@ -19,6 +19,7 @@ public class Login extends javax.swing.JPanel {
         configurarBotoes();
     }
 
+
     private void configurarBotoes() {
         jButtonCliente.addActionListener(new ActionListener() {
             @Override

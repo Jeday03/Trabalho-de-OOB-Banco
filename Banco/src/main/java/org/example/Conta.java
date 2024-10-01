@@ -82,7 +82,6 @@ public abstract class Conta {
     protected boolean verificaTransferencia(Conta remetente, double valor, double valorTransfere) throws IOException {
         if(existeTitular()) {
             if (retira(valor)) {
-                this.retira(valorTransfere);
                 remetente.incrementaSaldo(titular, valorTransfere);
                 LocalDate data = LocalDate.now();
                 List<Transacao> transacoes = extrato.get(titular.getCpf());

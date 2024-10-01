@@ -74,6 +74,7 @@ public class UserInterface extends javax.swing.JFrame{
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Interface Do Usuário");
@@ -186,6 +187,14 @@ public class UserInterface extends javax.swing.JFrame{
             }
         });
 
+        jButton5.setFont(new java.awt.Font("Sitka Banner", 1, 18)); // NOI18N
+        jButton5.setText("Fazer Transferência");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -208,8 +217,13 @@ public class UserInterface extends javax.swing.JFrame{
                 .addContainerGap(45, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(190, 190, 190))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addGap(184, 184, 184))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jButton5)
+                        .addGap(151, 151, 151))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,7 +240,9 @@ public class UserInterface extends javax.swing.JFrame{
                     .addComponent(jButton3))
                 .addGap(104, 104, 104)
                 .addComponent(jButton2)
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton5)
+                .addContainerGap(157, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel3);
@@ -359,6 +375,46 @@ public class UserInterface extends javax.swing.JFrame{
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+         // Solicita o CPF do destinatário
+        String cpfDestinatario = JOptionPane.showInputDialog(null, "Digite o CPF do destinatário:");
+        if (cpfDestinatario == null || cpfDestinatario.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "CPF inválido.");
+            return;
+        }
+
+        // Solicita o valor da transferência
+        String valorTransferenciaStr = JOptionPane.showInputDialog(null, "Digite o valor da transferência:");
+        double valorTransferencia;
+        try {
+            valorTransferencia = Double.parseDouble(valorTransferenciaStr);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Valor inválido.");
+            return;
+        }
+
+        // Verifica se o CPF é válido (esta validação depende de como a classe CPF está implementada)
+        CPF cpf = new CPF(cpfDestinatario);
+        
+
+        // Realiza a transferência
+        Conta destinatario = null;
+        try {
+            destinatario = Login.carregarContaPorCpf(cpf.toString(), "contas.txt");
+        } catch (IOException ex) {
+            Logger.getLogger(UserInterface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            if (conta.transferir(destinatario, valorTransferencia)) {
+                JOptionPane.showMessageDialog(null, "Transferência realizada com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Falha ao realizar a transferência. Verifique o saldo.");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(UserInterface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -400,6 +456,7 @@ public class UserInterface extends javax.swing.JFrame{
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -407,7 +464,7 @@ public class UserInterface extends javax.swing.JFrame{
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private static javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,12 +7,14 @@ import java.util.List;
 
 public class Login extends javax.swing.JPanel {
 
-    private ContaManager contaManager; // Gerenciador de contas
+    private ContaManager contaManager;
+    private Gerente gerente;// Gerenciador de contas
     private List<Conta> contas; // Lista de contas
 
-    public Login(ContaManager contaManager, List<Conta> contas) {
+    public Login(ContaManager contaManager, List<Conta> contas, Gerente gerente) {
         this.contaManager = contaManager;
         this.contas = contas;
+        this.gerente = gerente;
         initComponents();
         configurarBotoes();
     }
@@ -23,26 +25,47 @@ public class Login extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e) {
                 String cpf = jTextField1.getText();
                 String senha = new String(jPasswordField1.getPassword());
-                if (validarLogin(cpf, senha)) {
+                if (validarLogin(cpf, senha, true)) { // true indica que estamos validando um cliente
                     // Aqui você pode abrir a tela do cliente
-                    JOptionPane.showMessageDialog(Login.this, "Login bem-sucedido!");
+                    JOptionPane.showMessageDialog(Login.this, "Login de cliente bem-sucedido!");
                 } else {
                     JOptionPane.showMessageDialog(Login.this, "CPF ou senha inválidos!", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
 
-        // Você pode adicionar a lógica para o botão do gerente aqui, se necessário
+        jButtonGerente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String cpf = jTextField1.getText();
+                String senha = new String(jPasswordField1.getPassword());
+                if (validarLogin(cpf, senha, false)) { // false indica que estamos validando um gerente
+                    // Aqui você pode abrir a tela do gerente
+                    JOptionPane.showMessageDialog(Login.this, "Login de gerente bem-sucedido!");
+                } else {
+                    JOptionPane.showMessageDialog(Login.this, "CPF ou senha inválidos!", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
     }
 
-    private boolean validarLogin(String cpf, String senha) {
-        for (Conta conta : contas) {
-            if (conta.getTitular().getCpf().toString().equals(cpf) && conta.getTitular().getSenha().equals(senha)) {
-                return true; // CPF e senha válidos
+
+    private boolean validarLogin(String cpf, String senha, boolean isCliente) {
+        if (isCliente) {
+            // Validação para clientes
+            for (Conta conta : contas) {
+                if (conta.getTitular().getCpf().toString().equals(cpf) && conta.getTitular().getSenha().equals(senha)) {
+                    return true; // CPF e senha válidos
+                }
+            }
+        } else {
+            if (gerente != null && gerente.getCpf().toString().equals(cpf) && gerente.getSenha().equals(senha)) {
+                return true; // CPF e senha válidos para o gerente
             }
         }
         return false; // CPF ou senha inválidos
     }
+
 
     @SuppressWarnings("unchecked")
     private void initComponents() {

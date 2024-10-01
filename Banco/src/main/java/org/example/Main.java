@@ -25,8 +25,22 @@ public class Main {
             return; // Sai do método caso ocorra um erro
         }
 
+        GerenteManager gerenteManager = new GerenteManager();
+        Gerente gerente=null;
+        try {
+            gerenteManager.carregarGerente("gerente.txt");
+            gerente = gerenteManager.getGerente();
+            if (gerente != null) {
+                System.out.println("Gerente carregado:");
+                System.out.println("CPF: " + gerente.getCpf());
+                // Aqui você pode verificar a senha, etc.
+            }
+        } catch (IOException e) {
+            System.err.println("Erro ao carregar gerente: " + e.getMessage());
+        }
+
         JFrame frame = new JFrame("Login");
-        Login loginPanel = new Login(contaManager, contas); // Passa o gerenciador e as contas
+        Login loginPanel = new Login(contaManager, contas,gerente); // Passa o gerenciador e as contas
         frame.setContentPane(loginPanel);
 
         // Define tamanho da janela

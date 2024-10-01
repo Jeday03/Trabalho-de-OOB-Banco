@@ -111,9 +111,26 @@ public class Login extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Abrir a tela de Cadastro
+
+                JFrame CriarConta = new JFrame("Criar Conta");
+
+                SingUp singUpPanel = new SingUp();
+
+                CriarConta.setContentPane(singUpPanel);
+
+                // inicializa
+                CriarConta.setSize(800, 500);
+                CriarConta.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                CriarConta.pack();
+                CriarConta.setVisible(true);
+                CriarConta.setLocationRelativeTo(null);
+                ((JFrame) SwingUtilities.getWindowAncestor(Login.this)).dispose(); // Fechar a tela de Login
+
+                /*
                 Cadastro cadastro = new Cadastro();
                 cadastro.setVisible(true); // Exibir a nova janela de cadastro
                 ((JFrame) SwingUtilities.getWindowAncestor(Login.this)).dispose(); // Fechar a tela de Login
+           */
             }
         });
 

@@ -4,13 +4,17 @@
  */
 package org.example;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,8 +25,16 @@ public class InterfaceGerente extends javax.swing.JPanel {
     /**
      * Creates new form InterfaceGerente
      */
+    private List<Conta> contas;
     public InterfaceGerente() {
         initComponents();
+        contas = new ArrayList<>();
+        try{
+            contas=ContaManager.carregarContas("contas.txt");
+            carregarTabela();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -71,10 +83,22 @@ public class InterfaceGerente extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        Direita = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        Direita = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        campoCPF = new javax.swing.JTextField();
+        campoNome = new javax.swing.JTextField();
+        campoSenha = new javax.swing.JTextField();
+        campoTelefone = new javax.swing.JTextField();
+        campoTelefone2 = new javax.swing.JTextField();
 
         jPanel1.setMinimumSize(new java.awt.Dimension(800, 500));
         jPanel1.setLayout(null);
@@ -99,41 +123,6 @@ public class InterfaceGerente extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("SimSun", 1, 48)); // NOI18N
         jLabel1.setText("Gerente");
 
-        javax.swing.GroupLayout EsquerdaLayout = new javax.swing.GroupLayout(Esquerda);
-        Esquerda.setLayout(EsquerdaLayout);
-        EsquerdaLayout.setHorizontalGroup(
-            EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EsquerdaLayout.createSequentialGroup()
-                .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(EsquerdaLayout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(EsquerdaLayout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(jLabel1))
-                    .addGroup(EsquerdaLayout.createSequentialGroup()
-                        .addGap(133, 133, 133)
-                        .addComponent(jButton1)))
-                .addContainerGap(95, Short.MAX_VALUE))
-        );
-        EsquerdaLayout.setVerticalGroup(
-            EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(EsquerdaLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(74, 74, 74))
-        );
-
-        jPanel1.add(Esquerda);
-        Esquerda.setBounds(0, 0, 350, 500);
-
-        Direita.setBackground(new java.awt.Color(255, 255, 255));
-        Direita.setPreferredSize(new java.awt.Dimension(400, 500));
-
         jButton3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jButton3.setText("Editar Conta");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -153,46 +142,219 @@ public class InterfaceGerente extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Serif", 1, 48)); // NOI18N
         jLabel3.setText("Opções");
 
+        javax.swing.GroupLayout EsquerdaLayout = new javax.swing.GroupLayout(Esquerda);
+        Esquerda.setLayout(EsquerdaLayout);
+        EsquerdaLayout.setHorizontalGroup(
+            EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EsquerdaLayout.createSequentialGroup()
+                .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton4)
+                    .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(EsquerdaLayout.createSequentialGroup()
+                            .addGap(130, 130, 130)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(EsquerdaLayout.createSequentialGroup()
+                            .addGap(76, 76, 76)
+                            .addComponent(jLabel1))
+                        .addGroup(EsquerdaLayout.createSequentialGroup()
+                            .addGap(133, 133, 133)
+                            .addComponent(jButton1)))
+                    .addGroup(EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel3)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(95, Short.MAX_VALUE))
+        );
+        EsquerdaLayout.setVerticalGroup(
+            EsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EsquerdaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addGap(33, 33, 33)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(jButton4)
+                .addGap(26, 26, 26)
+                .addComponent(jButton1)
+                .addGap(74, 74, 74))
+        );
+
+        jPanel1.add(Esquerda);
+        Esquerda.setBounds(0, 0, 350, 500);
+
+        Direita.setBackground(new java.awt.Color(255, 255, 255));
+        Direita.setPreferredSize(new java.awt.Dimension(400, 500));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "CPF", "Nome", "Telefone", "Senha", "Data De Nascimento"
+            }
+        ));
+        jTable1.setShowVerticalLines(true);
+        jTable1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jTable1AncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        jLabel4.setText("CPF");
+
+        jLabel5.setText("Nome");
+
+        jLabel6.setText("Telefone");
+
+        jLabel7.setText("Senha");
+
+        jLabel8.setText("DataNascimento");
+
+        campoCPF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoCPFActionPerformed(evt);
+            }
+        });
+
+        campoSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoSenhaActionPerformed(evt);
+            }
+        });
+
+        campoTelefone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoTelefoneActionPerformed(evt);
+            }
+        });
+
+        campoTelefone2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoTelefone2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout DireitaLayout = new javax.swing.GroupLayout(Direita);
         Direita.setLayout(DireitaLayout);
         DireitaLayout.setHorizontalGroup(
             DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DireitaLayout.createSequentialGroup()
-                .addContainerGap(151, Short.MAX_VALUE)
-                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton4)
-                    .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(DireitaLayout.createSequentialGroup()
-                            .addGap(9, 9, 9)
-                            .addComponent(jLabel3))
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(141, 141, 141))
+            .addGroup(DireitaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(DireitaLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(DireitaLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel7))
+                            .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel6))))
+                    .addGroup(DireitaLayout.createSequentialGroup()
+                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addGroup(DireitaLayout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(jLabel4)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(campoCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                            .addComponent(campoNome)
+                            .addComponent(campoTelefone)
+                            .addComponent(campoSenha)
+                            .addComponent(campoTelefone2))))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         DireitaLayout.setVerticalGroup(
             DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DireitaLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(jLabel3)
-                .addGap(105, 105, 105)
-                .addComponent(jButton3)
-                .addGap(49, 49, 49)
-                .addComponent(jButton4)
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(campoCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(9, 9, 9)
+                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(campoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(campoSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(campoTelefone2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jPanel1.add(Direita);
-        Direita.setBounds(350, 0, 460, 500);
+        Direita.setBounds(350, 0, 500, 500);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 813, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 828, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
+        jTable1.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                int row = jTable1.getSelectedRow(); // Obtem a linha selecionada
+                if (row != -1) {
+                    // Supondo que você tenha um modelo de tabela com colunas na ordem correta
+                    String cpf = jTable1.getValueAt(row, 0).toString();
+                    String nome = jTable1.getValueAt(row, 1).toString();
+                    String telefone = jTable1.getValueAt(row, 2).toString();
+                    String senha = jTable1.getValueAt(row, 3).toString();
+                    String dataNascimento = jTable1.getValueAt(row, 4).toString();
+
+                    // Atualiza os campos de texto
+                    campoCPF.setText(cpf);
+                    campoNome.setText(nome);
+                    campoTelefone.setText(telefone);
+                    campoSenha.setText(senha);
+                    campoTelefone2.setText(dataNascimento);
+                }
+            }
+        });
+
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -281,96 +443,67 @@ public class InterfaceGerente extends javax.swing.JPanel {
     }
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        
-        String cpf = JOptionPane.showInputDialog("Digite o CPF da conta a ser editada:");
 
-        if (cpf == null || cpf.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "CPF não pode ser vazio!", "Erro", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Menu para escolher o dado a ser editado
-        String[] opcoes = {"Nome", "Telefone", "Senha", "Data de Nascimento"};
-        int escolha = JOptionPane.showOptionDialog(null, 
-                "Qual dado você deseja editar?", 
-                "Escolher Dado", 
-                JOptionPane.DEFAULT_OPTION, 
-                JOptionPane.QUESTION_MESSAGE, 
-                null, 
-                opcoes, 
-                opcoes[0]);
-
-        if (escolha == -1) {
-            JOptionPane.showMessageDialog(null, "Nenhuma opção selecionada.", "Erro", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        String novoValor = JOptionPane.showInputDialog("Digite o novo valor para " + opcoes[escolha] + ":");
-        if (novoValor == null || novoValor.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "O novo valor não pode ser vazio!", "Erro", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Criar novo Cliente com dados atuais, mas atualizar apenas o que foi escolhido
-        Cliente novosDados = null;
-        try {
-            novosDados = obterDadosAtualizados(cpf, novoValor, escolha);
-            if (novosDados == null) {
-                JOptionPane.showMessageDialog(null, "Erro ao atualizar os dados.", "Erro", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(InterfaceGerente.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Erro ao acessar os dados da conta.", "Erro", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        String arquivoCSV = "contas.txt"; // Substitua pelo caminho real do seu arquivo CSV
-
-        boolean sucesso = Gerente.editarConta(cpf, novosDados);
-
-        if (sucesso) {
-            JOptionPane.showMessageDialog(null, "Conta editada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, "Conta não encontrada ou erro ao editar.", "Erro", JOptionPane.ERROR_MESSAGE);
-        }
-
-        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        String cpf = JOptionPane.showInputDialog(this, "Digite o CPF da conta a ser excluída:");
-
-        if (cpf == null || cpf.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "CPF não pode ser vazio!", "Erro", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        boolean foi = false;
-        try {
-             foi = Gerente.excluirConta(cpf);
-        } catch (IOException ex) {
-            Logger.getLogger(InterfaceGerente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        if (foi) {
-        JOptionPane.showMessageDialog(this, "Conta excluída com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(this, "Erro encontrado ou conta não possui saldo igual a zero.", "Erro", JOptionPane.ERROR_MESSAGE);
-        }
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jTable1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTable1AncestorAdded
+    }//GEN-LAST:event_jTable1AncestorAdded
+
+    private void campoCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCPFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoCPFActionPerformed
+
+    private void campoSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoSenhaActionPerformed
+
+    private void campoTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoTelefoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoTelefoneActionPerformed
+
+    private void campoTelefone2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoTelefone2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoTelefone2ActionPerformed
+    private void carregarTabela() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0); // Clear existing rows
+        for (Conta conta : contas) {
+            model.addRow(new Object[]{
+                    conta.getTitular().getCpfString(),
+                    conta.getTitular().getNome(),
+                    conta.getTitular().getTelefone().toString(),
+                    conta.getTitular().getSenha(),
+                    conta.getTitular().getDataNascimento().toString() // Assumindo que toString() está implementado
+            });
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Direita;
     private javax.swing.JPanel Esquerda;
+    private javax.swing.JTextField campoCPF;
+    private javax.swing.JTextField campoNome;
+    private javax.swing.JTextField campoSenha;
+    private javax.swing.JTextField campoTelefone;
+    private javax.swing.JTextField campoTelefone2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
 

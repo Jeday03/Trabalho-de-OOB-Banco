@@ -12,7 +12,7 @@ public class Gerente extends Pessoa {
         super(cpf, senha);
     }
 
-    public boolean editarConta(String cpf, String arquivoCSV, Cliente novosDados) {
+    public static boolean editarConta(String cpf, String arquivoCSV, Cliente novosDados) {
         try {
             // Carregar todas as contas do arquivo CSV
             List<Conta> contas = ContaManager.carregarContas(arquivoCSV);
@@ -41,7 +41,7 @@ public class Gerente extends Pessoa {
         }
     }
 
-    private void salvarContasNoArquivo(List<Conta> contas, String arquivoCSV) throws IOException {
+    private static void salvarContasNoArquivo(List<Conta> contas, String arquivoCSV) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivoCSV))) {
             for (Conta conta : contas) {
                 // Escrever os dados da conta e do cliente no arquivo CSV

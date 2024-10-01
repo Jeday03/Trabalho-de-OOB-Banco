@@ -6,7 +6,10 @@ package org.example;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 /**
@@ -240,10 +243,112 @@ public class InterfaceGerente extends javax.swing.JPanel {
 
         // Torna a janela visível
         frame.setVisible(true);
+        ((JFrame) SwingUtilities.getWindowAncestor(InterfaceGerente.this)).dispose(); // Fechar a tela de Login
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public static Conta carregarContaPorCpf(String cpf, String arquivo) throws IOException {
+        List<Conta> contas = ContaManager.carregarContas(arquivo);
+        for (Conta conta : contas) {
+            if (conta.getTitular().getCpf().equals(cpf)) {
+                return conta; // Retorna a conta correspondente ao CPF
+            }
+        }
+        return null; // Retorna null se a conta não for encontrada
+    }
+    
+    private Cliente obterDadosAtualizados(String cpf, String novoValor, int escolha) throws IOException {
+        // Carregue a conta atual para obter os dados
+        Conta conta = carregarContaPorCpf(cpf, "contas.txt"); // Supondo que você tenha um método para carregar a conta
+
+        if (conta == null) {
+            return null; // Conta não encontrada
+        }
+
+        Cliente cliente = conta.getTitular();
+
+        // Para manipular telefone e data de nascimento
+        Telefone telefone = cliente.getTelefone(); 
+        DataNascimento dataNascimento = cliente.getDataNascimento(); 
+
+        switch (escolha) {
+            case 0: // Nome
+                cliente.setNome(novoValor);
+                break;
+            case 1: // Telefone
+                telefone = new Telefone(novoValor); // Criar novo objeto Telefone
+                cliente.setTelefone(telefone);
+                break;
+            case 2: // Senha
+                cliente.setSenha(novoValor);
+                break;
+            case 3: // Data de Nascimento
+                dataNascimento = new DataNascimento(novoValor); // Criar novo objeto DataNascimento
+                cliente.setDataNascimento(dataNascimento);
+                break;
+            default:
+                return null; // Caso de escolha inválida
+        }
+
+        return cliente; // Retornar cliente atualizado
+    }
+    
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        
+        String cpf = JOptionPane.showInputDialog("Digite o CPF da conta a ser editada:");
+
+        if (cpf == null || cpf.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "CPF não pode ser vazio!", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Menu para escolher o dado a ser editado
+        String[] opcoes = {"Nome", "Telefone", "Senha", "Data de Nascimento"};
+        int escolha = JOptionPane.showOptionDialog(null, 
+                "Qual dado você deseja editar?", 
+                "Escolher Dado", 
+                JOptionPane.DEFAULT_OPTION, 
+                JOptionPane.QUESTION_MESSAGE, 
+                null, 
+                opcoes, 
+                opcoes[0]);
+
+        if (escolha == -1) {
+            JOptionPane.showMessageDialog(null, "Nenhuma opção selecionada.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String novoValor = JOptionPane.showInputDialog("Digite o novo valor para " + opcoes[escolha] + ":");
+        if (novoValor == null || novoValor.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "O novo valor não pode ser vazio!", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Criar novo Cliente com dados atuais, mas atualizar apenas o que foi escolhido
+        Cliente novosDados = null;
+        try {
+            novosDados = obterDadosAtualizados(cpf, novoValor, escolha);
+            if (novosDados == null) {
+                JOptionPane.showMessageDialog(null, "Erro ao atualizar os dados.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(InterfaceGerente.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro ao acessar os dados da conta.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        String arquivoCSV = "contas.txt"; // Substitua pelo caminho real do seu arquivo CSV
+
+        boolean sucesso = Gerente.editarConta(cpf, arquivoCSV, novosDados);
+
+        if (sucesso) {
+            JOptionPane.showMessageDialog(null, "Conta editada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Conta não encontrada ou erro ao editar.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

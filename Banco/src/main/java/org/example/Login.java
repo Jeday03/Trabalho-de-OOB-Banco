@@ -35,7 +35,6 @@ public class Login extends javax.swing.JPanel {
                     painelDoUsuario.setVisible(true); 
                     ((JFrame) SwingUtilities.getWindowAncestor(Login.this)).dispose(); // Fechar a tela de Login
 
-                    JOptionPane.showMessageDialog(Login.this, "Login de cliente bem-sucedido!");
                 } else {
                     JOptionPane.showMessageDialog(Login.this, "CPF ou senha inválidos!", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
@@ -63,7 +62,7 @@ public class Login extends javax.swing.JPanel {
             frame.setVisible(true);
            ((JFrame) SwingUtilities.getWindowAncestor(Login.this)).dispose(); // Fechar a tela de Login
 
-                    JOptionPane.showMessageDialog(Login.this, "Login de gerente bem-sucedido!");
+
                 } else {
                     JOptionPane.showMessageDialog(Login.this, "CPF ou senha inválidos!", "Erro", JOptionPane.ERROR_MESSAGE);
                 }

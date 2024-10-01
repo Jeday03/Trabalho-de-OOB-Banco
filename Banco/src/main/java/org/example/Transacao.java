@@ -44,6 +44,4 @@ public class Transacao {
     public String getRemetente() {
         return remetente;
     }
-
-
 }

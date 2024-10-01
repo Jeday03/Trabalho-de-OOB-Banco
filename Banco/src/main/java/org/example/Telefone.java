@@ -3,7 +3,7 @@ package org.example;
 public class Telefone {
     private String telefone;
 
-    private Telefone(String telefone) {
+    Telefone(String telefone) {
         this.telefone = telefone;
     }
 

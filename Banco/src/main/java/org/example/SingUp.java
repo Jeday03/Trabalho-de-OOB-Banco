@@ -54,6 +54,7 @@ public class SingUp extends javax.swing.JPanel {
         jTextField8 = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(800, 500));
 
@@ -170,6 +171,16 @@ public class SingUp extends javax.swing.JPanel {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(102, 153, 255));
+        jButton2.setText("Voltar");
+        jButton2.setBorder(null);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -190,14 +201,18 @@ public class SingUp extends javax.swing.JPanel {
                             .addComponent(jLabel13)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel3)
-                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addGap(94, 94, 94)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel10)))
-                        .addGap(38, 38, 38))))
+                        .addGap(38, 38, 38))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addGap(36, 36, 36)))
+                        .addGap(140, 140, 140))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,7 +231,7 @@ public class SingUp extends javax.swing.JPanel {
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -224,9 +239,11 @@ public class SingUp extends javax.swing.JPanel {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(34, 34, 34)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(111, 111, 111))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
+                .addGap(66, 66, 66))
         );
 
         jPanel1.add(jPanel3);
@@ -349,13 +366,6 @@ public class SingUp extends javax.swing.JPanel {
             try {
                 contas = contaManager.carregarContas("contas.txt");
 
-                // Verificando se as contas foram criadas corretamente
-                for (Conta conta1 : contas) {
-                    System.out.println("Conta criada: " + conta1.getClass().getSimpleName());
-                    System.out.println("Titular: " + conta1.getTitular().getNome());
-                    System.out.println("Saldo: " + conta1.getSaldo());
-                    System.out.println("-----------------------");
-                }
             } catch (IOException e) {
                 System.err.println("Erro ao carregar contas: " + e.getMessage());
                 return; // Sai do metodo caso ocorra um erro
@@ -366,11 +376,6 @@ public class SingUp extends javax.swing.JPanel {
             try {
                 gerenteManager.carregarGerente("gerente.txt");
                 gerente = gerenteManager.getGerente();
-                if (gerente != null) {
-                    System.out.println("Gerente carregado:");
-                    System.out.println("CPF: " + gerente.getCpf());
-                    // Aqui você pode verificar a senha, etc.
-                }
             } catch (IOException e) {
                 System.err.println("Erro ao carregar gerente: " + e.getMessage());
             }
@@ -391,6 +396,51 @@ public class SingUp extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        // Abre a tela de login após o cadastro
+            ContaManager contaManager = new ContaManager();
+            List<Conta> contas;
+
+            try {
+                contas = contaManager.carregarContas("contas.txt");
+
+            } catch (IOException e) {
+                System.err.println("Erro ao carregar contas: " + e.getMessage());
+                return; // Sai do metodo caso ocorra um erro
+            }
+
+            GerenteManager gerenteManager = new GerenteManager();
+            Gerente gerente=null;
+            try {
+                gerenteManager.carregarGerente("gerente.txt");
+                gerente = gerenteManager.getGerente();
+            } catch (IOException e) {
+                System.err.println("Erro ao carregar gerente: " + e.getMessage());
+            }
+        
+        // Cria uma nova instância da tela de login
+        JFrame loginFrame = new JFrame("Login");
+
+        // Aqui, você pode precisar ajustar a criação do painel de login conforme necessário
+        // Certifique-se de que você está passando as referências corretas, se necessário
+        Login loginPanel = new Login(contaManager, contas, gerente); 
+
+        // Configura o painel de login na nova janela
+        loginFrame.setContentPane(loginPanel);
+        loginFrame.setSize(800, 500);
+        loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        loginFrame.pack();
+        loginFrame.setVisible(true);
+        loginFrame.setLocationRelativeTo(null);
+
+        // Fecha o painel atual (cadastro)
+        JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        parentFrame.dispose();
+         
+    }//GEN-LAST:event_jButton2ActionPerformed
     private boolean validarCPF(String cpf) {
            // Lógica de validação de CPF conforme o primeiro código
            String CPF_REGEX = "^\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}$|^\\d{11}$";
@@ -471,6 +521,7 @@ public class SingUp extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup TipoDePessoa;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;

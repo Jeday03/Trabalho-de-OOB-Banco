@@ -41,23 +41,31 @@ public class Gerente extends Pessoa {
             return false;
         }
     }
-
-    public boolean excluirConta(String cpf, String arquivoCSV) {
+    //recebe um cpf e excui a conta associada se o saldo for igual a 0.
+    public boolean excluirConta(String cpf) {
         try {
             // Carregar todas as contas do arquivo CSV
             List<Conta> contas = ContaManager.carregarContas(arquivoCSV);
 
-            // Procurar a conta que possui o CPF correspondente e removê-la
-            boolean contaRemovida = contas.removeIf(conta -> conta.getTitular().getCpf().toString().equals(cpf));
-
-            if (contaRemovida) {
-                // Sobrescrever o arquivo CSV com as contas atualizadas (sem a conta removida)
-                salvarContasNoArquivo(contas, arquivoCSV);
-                return true; // Conta removida com sucesso
-            } else {
-                System.out.println("Conta não encontrada.");
-                return false; // Não encontrou a conta com o CPF informado
+            // Procurar a conta que possui o CPF correspondente
+            for (Conta conta : contas) {
+                if (conta.getTitular().getCpf().toString().equals(cpf)) {
+                    // Verificar se o saldo da conta é igual a 0
+                    if (conta.getSaldo() == 0) {
+                        // Remover a conta da lista
+                        contas.remove(conta);
+                        // Sobrescrever o arquivo CSV com as contas atualizadas
+                        salvarContasNoArquivo(contas, arquivoCSV);
+                        return true; // Conta removida com sucesso
+                    } else {
+                        System.out.println("Não é possível remover a conta. O saldo deve ser igual a 0.");
+                        return false; // Conta não pode ser removida se o saldo não for 0
+                    }
+                }
             }
+
+            System.out.println("Conta não encontrada.");
+            return false; // Não encontrou a conta com o CPF informado
         } catch (IOException e) {
             System.err.println("Erro ao excluir a conta: " + e.getMessage());
             return false;

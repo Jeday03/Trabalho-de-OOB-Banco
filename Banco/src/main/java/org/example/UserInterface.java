@@ -4,12 +4,17 @@
  */
 package org.example;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
 /**
  *
@@ -18,22 +23,34 @@ import javax.swing.SwingUtilities;
 public class UserInterface extends javax.swing.JFrame{
 
     private static Conta conta;
+    private Timer timer;
 
-    /**
-     * Creates new form UserInterface
-     */
 
     public UserInterface(Conta conta) {
         this.conta = conta;
         initComponents();
         atualizarInterface(); // Atualiza a interface com os dados da conta
-    
+
+        // Cria um Timer que chama o método atualizarInterface a cada 1 segundo (1000 milissegundos)
+        timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                atualizarInterface(); // Atualiza o saldo na interface periodicamente
+            }
+        });
+        timer.start(); // Inicia o Timer
     }
-    
+
     private void atualizarInterface() {
-    jLabel1.setText(String.format("R$ %.2f", conta.getSaldo()));
-    // Atualizar outros componentes, como extrato
-}
+        jLabel1.setText(String.format("R$ %.2f", conta.getSaldo()));
+    }
+
+    // Certifique-se de parar o timer quando fechar a interface para evitar problemas de performance
+    @Override
+    public void dispose() {
+        timer.stop(); // Para o Timer ao fechar a janela
+        super.dispose();
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -161,7 +178,11 @@ public class UserInterface extends javax.swing.JFrame{
         jButton4.setBorder(null);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                try {
+                    jButton4ActionPerformed(evt);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -294,11 +315,48 @@ public class UserInterface extends javax.swing.JFrame{
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+       try {
+            // Obtém o valor digitado no campo de texto e tenta sacar
+            double dinheiro = Double.parseDouble(jTextField2.getText());
+            boolean foi = conta.depositar(dinheiro);
+
+            if (foi) {
+                // Exibe um JOptionPane de sucesso se o saque for bem-sucedido
+                JOptionPane.showMessageDialog(this, "Deposito realizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                atualizarInterface(); // Atualiza o saldo na interface
+            } else {
+                // Exibe uma mensagem de erro caso o saldo seja insuficiente ou o saque não seja permitido
+                JOptionPane.showMessageDialog(this, "Deposito não realizado. Saldo insuficiente!", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (NumberFormatException ex) {
+            // Exibe uma mensagem de erro caso o valor digitado não seja um número válido
+            JOptionPane.showMessageDialog(this, "Por favor, insira um valor válido.", "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException ex) {
+            Logger.getLogger(UserInterface.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_jButton4ActionPerformed
+
+        try {
+            // Obtém o valor digitado no campo de texto e tenta sacar
+            double dinheiro = Double.parseDouble(jTextField1.getText());
+            boolean foi = conta.sacar(dinheiro);
+
+            if (foi) {
+                // Exibe um JOptionPane de sucesso se o saque for bem-sucedido
+                JOptionPane.showMessageDialog(this, "Saque realizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                atualizarInterface(); // Atualiza o saldo na interface
+            } else {
+                // Exibe uma mensagem de erro caso o saldo seja insuficiente ou o saque não seja permitido
+                JOptionPane.showMessageDialog(this, "Saque não realizado. Saldo insuficiente!", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (NumberFormatException ex) {
+            // Exibe uma mensagem de erro caso o valor digitado não seja um número válido
+            JOptionPane.showMessageDialog(this, "Por favor, insira um valor válido.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+            
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
@@ -349,7 +407,7 @@ public class UserInterface extends javax.swing.JFrame{
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
+    private static javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

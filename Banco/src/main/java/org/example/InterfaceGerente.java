@@ -352,7 +352,25 @@ public class InterfaceGerente extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        String cpf = JOptionPane.showInputDialog(this, "Digite o CPF da conta a ser excluída:");
+
+        if (cpf == null || cpf.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "CPF não pode ser vazio!", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        boolean foi = false;
+        try {
+             foi = Gerente.excluirConta(cpf);
+        } catch (IOException ex) {
+            Logger.getLogger(InterfaceGerente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if (foi) {
+        JOptionPane.showMessageDialog(this, "Conta excluída com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Erro encontrado ou conta não possui saldo igual a zero.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
 

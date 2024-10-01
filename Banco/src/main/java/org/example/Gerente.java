@@ -44,7 +44,7 @@ public class Gerente extends Pessoa {
         }
     }
     //recebe um cpf e excui a conta associada se o saldo for igual a 0.
-    public boolean excluirConta(String cpf) throws IOException {
+    public static boolean excluirConta(String cpf) throws IOException {
         String arquivoCSV = "contas.txt";
         try {
             // Carregar todas as contas do arquivo CSV

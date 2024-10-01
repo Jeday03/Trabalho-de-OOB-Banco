@@ -420,7 +420,7 @@ public class SingUp extends javax.swing.JPanel {
         }
 
         // Lógica para verificar se o CPF já está cadastrado em "gerente.txt"
-        try (BufferedReader reader = new BufferedReader(new FileReader("contas.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("gerente.txt"))) {
             String linha;
             while ((linha = reader.readLine()) != null) {
                 String[] dados = linha.split(","); // Supondo que os dados estão separados por vírgula

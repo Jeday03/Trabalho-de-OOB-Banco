@@ -1,8 +1,6 @@
 package org.example;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +35,7 @@ public class ContaManager {
                     if(subclasse.equals("CPoupanca"))
                         conta = new CPoupanca();
 
+                    conta.setSaldo(saldo);
                     conta.setTitular(cliente);
                     contas.add(conta);
 
@@ -47,5 +46,21 @@ public class ContaManager {
         }
 
         return contas;
+    }
+    public static void salvarContasNoArquivo(List<Conta> contas) throws IOException {
+        String arquivoCSV="contas.txt";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(arquivoCSV))) {
+            // Percorrer todas as contas e salvar no formato correto
+            for (Conta conta : contas) {
+                Cliente cliente = conta.getTitular();
+                if (cliente != null) {
+                    // Gravação no arquivo CSV, separando por vírgulas
+                    writer.write(cliente.toString() + "," + conta.getSaldo() + "," + conta.getClass().getSimpleName());
+                    writer.newLine(); // Avançar para a próxima linha
+                }
+            }
+        } catch (IOException e) {
+            throw new IOException("Erro ao salvar as contas no arquivo: " + e.getMessage());
+        }
     }
 }

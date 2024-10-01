@@ -1,5 +1,6 @@
 package org.example;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -32,8 +33,8 @@ public abstract class Conta {
         return extrato;
     }
 
-    public void incrementaSaldo(Cliente autor, double valor) {
-        if(existeTitular()) {
+    public void incrementaSaldo(Cliente autor, double valor) throws IOException {
+        if (existeTitular()) {
             if (autor != null) {
                 LocalDate data = LocalDate.now();
                 List<Transacao> transacoes = extrato.get(titular.getCpf());
@@ -42,10 +43,14 @@ public abstract class Conta {
                 }
             }
             this.saldo += valor;
+
+            // Chama o método para atualizar o saldo no arquivo
+            Gerente.mudarSaldo(this.getTitular().getCpfString(), this.saldo);
         }
     }
 
-    public boolean sacar(double valor) {
+
+    public boolean sacar(double valor) throws IOException {
         if(existeTitular()) {
             if (retira(valor)) {
                 LocalDate data = LocalDate.now();
@@ -57,21 +62,25 @@ public abstract class Conta {
                     return true;
                 }
             }
+            System.out.println(saldo);
         }
+
         return false;
     }
 
-    protected boolean retira(double valor) {
+    protected boolean retira(double valor) throws IOException {
         if (saldo >= valor) {
             saldo -= valor;
+            Gerente.mudarSaldo(this.getTitular().getCpfString(), this.saldo);
             return true;
         }
         return false;
     }
 
-    protected boolean verificaTransferencia(Conta remetente, double valor, double valorTransfere){
+    protected boolean verificaTransferencia(Conta remetente, double valor, double valorTransfere) throws IOException {
         if(existeTitular()) {
             if (retira(valor)) {
+                this.retira(valorTransfere);
                 remetente.incrementaSaldo(titular, valorTransfere);
                 LocalDate data = LocalDate.now();
                 List<Transacao> transacoes = extrato.get(titular.getCpf());
@@ -84,11 +93,11 @@ public abstract class Conta {
         return false;
     }
 
-    public boolean transferir(Conta remetente, double valor) {
+    public boolean transferir(Conta remetente, double valor) throws IOException {
         return verificaTransferencia(remetente, valor,valor);
     }
 
-    public boolean depositar(double valor) {
+    public boolean depositar(double valor) throws IOException {
         if(existeTitular()) {
             if (valor > 0) {
                 incrementaSaldo(null, valor); // Atualizar o saldo
@@ -117,4 +126,7 @@ public abstract class Conta {
         return  "" + saldo;
     }
 
+    public void setSaldo(double novoSaldo) {
+        saldo = novoSaldo;
+    }
 }

@@ -13,6 +13,9 @@
         public CPF getCpf() {
             return cpf;
         }
+        public String getCpfString(){
+            return cpf.toString();
+        }
 
         public String getSenha() {
             return senha;

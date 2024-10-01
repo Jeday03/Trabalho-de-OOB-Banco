@@ -2,7 +2,7 @@ package org.example;
 
 import java.io.Serializable;
 
-public class Cliente extends Pessoa{
+public  class  Cliente extends Pessoa{
     private DataNascimento dataNascimento;
     private String nome;
     private Telefone telefone;
@@ -52,4 +52,5 @@ public class Cliente extends Pessoa{
     public Telefone getTelefone() {
         return telefone;
     }
+    
 }

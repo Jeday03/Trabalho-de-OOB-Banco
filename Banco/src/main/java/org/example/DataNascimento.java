@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class DataNascimento {
     private String data;
 
-    private DataNascimento(String data) {
+    DataNascimento(String data) {
         this.data = data;
     }
 

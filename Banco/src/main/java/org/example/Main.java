@@ -13,13 +13,7 @@ public class Main {
         try {
             contas = contaManager.carregarContas("contas.txt");
 
-            // Verificando se as contas foram criadas corretamente
-            for (Conta conta : contas) {
-                System.out.println("Conta criada: " + conta.getClass().getSimpleName());
-                System.out.println("Titular: " + conta.getTitular().getNome());
-                System.out.println("Saldo: " + conta.getSaldo());
-                System.out.println("-----------------------");
-            }
+
         } catch (IOException e) {
             System.err.println("Erro ao carregar contas: " + e.getMessage());
             return; // Sai do metodo caso ocorra um erro
@@ -43,10 +37,10 @@ public class Main {
         Login loginPanel = new Login(contaManager, contas,gerente); // Passa o gerenciador e as contas
         frame.setContentPane(loginPanel);
 
-//        TESTE SACAR E DEPOSITAR
+        //TESTE SACAR E DEPOSITAR
 //        Conta conta=contas.getFirst();
 //        try {
-//            conta.depositar(1000);
+//            conta.depositar(1000000);
 //            conta.sacar(2800);
 //        } catch (IOException e) {
 //            throw new RuntimeException(e);

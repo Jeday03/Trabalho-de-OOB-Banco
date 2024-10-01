@@ -3,7 +3,7 @@ package org.example;
 public class CPF {
     private String cpf;
 
-    private CPF(String cpf) {
+    CPF(String cpf) {
         this.cpf = cpf;
     }
 

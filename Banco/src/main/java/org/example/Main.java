@@ -6,18 +6,26 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-            ClienteManager clienteManager = new ClienteManager();
 
-            try {
-                List<Cliente> clientes = clienteManager.carregarClientes("clientes.txt");
-                for (Cliente cliente : clientes) {
-                    System.out.println(cliente); // Imprime ou manipula o cliente como desejar
-                }
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(null, "Erro ao carregar clientes: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        ContaManager contaManager = new ContaManager();
+
+        try {
+            List<Conta> contas = contaManager.carregarContas("contas.txt");
+
+            // Verificando se as contas foram criadas corretamente
+            for (Conta conta : contas) {
+                System.out.println("Conta criada: " + conta.getClass().getSimpleName());
+                System.out.println("Titular: " + conta.getTitular().getNome());
+                System.out.println("Saldo: " + conta.getSaldo());
+                System.out.println("-----------------------");
             }
+        } catch (IOException e) {
+            System.err.println("Erro ao carregar contas: " + e.getMessage());
+        }
 
-        JFrame frame = new JFrame("Login");
+
+
+    JFrame frame = new JFrame("Login");
 
         // Define o conteúdo do JFrame como o painel de login
         Login loginPanel = new Login();

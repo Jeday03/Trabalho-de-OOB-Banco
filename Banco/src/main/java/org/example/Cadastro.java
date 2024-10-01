@@ -21,48 +21,49 @@ public class Cadastro extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
 
+        // Inicialização dos campos de entrada
         JLabel nomeLabel = new JLabel("Nome:");
-        nomeLabel.setBounds(30, 30, 100, 25);
+        nomeLabel.setBounds(10, 10, 80, 25);
         add(nomeLabel);
 
         nomeField = new JTextField();
-        nomeField.setBounds(150, 30, 200, 25);
+        nomeField.setBounds(100, 10, 160, 25);
         add(nomeField);
 
         JLabel telefoneLabel = new JLabel("Telefone:");
-        telefoneLabel.setBounds(30, 110, 100, 25);
+        telefoneLabel.setBounds(10, 40, 80, 25);
         add(telefoneLabel);
 
         telefoneField = new JTextField();
-        telefoneField.setBounds(150, 110, 200, 25);
+        telefoneField.setBounds(100, 40, 160, 25);
         add(telefoneField);
 
         JLabel cpfLabel = new JLabel("CPF:");
-        cpfLabel.setBounds(30, 150, 100, 25);
+        cpfLabel.setBounds(10, 70, 80, 25);
         add(cpfLabel);
 
         cpfField = new JTextField();
-        cpfField.setBounds(150, 150, 200, 25);
+        cpfField.setBounds(100, 70, 160, 25);
         add(cpfField);
 
-        JLabel dataNascimentoLabel = new JLabel("Data de Nascimento:");
-        dataNascimentoLabel.setBounds(30, 190, 150, 25);
+        JLabel dataNascimentoLabel = new JLabel("Data Nascimento:");
+        dataNascimentoLabel.setBounds(10, 100, 120, 25);
         add(dataNascimentoLabel);
 
         dataNascimentoField = new JTextField();
-        dataNascimentoField.setBounds(150, 190, 200, 25);
+        dataNascimentoField.setBounds(130, 100, 130, 25);
         add(dataNascimentoField);
 
         JLabel senhaLabel = new JLabel("Senha:");
-        senhaLabel.setBounds(30, 230, 100, 25);
+        senhaLabel.setBounds(10, 130, 80, 25);
         add(senhaLabel);
 
         senhaField = new JPasswordField();
-        senhaField.setBounds(150, 230, 200, 25);
+        senhaField.setBounds(100, 130, 160, 25);
         add(senhaField);
 
         cadastrarButton = new JButton("Cadastrar");
-        cadastrarButton.setBounds(150, 270, 100, 25);
+        cadastrarButton.setBounds(100, 160, 120, 25);
         add(cadastrarButton);
 
         cadastrarButton.addActionListener(new ActionListener() {
@@ -71,6 +72,8 @@ public class Cadastro extends JFrame {
                 cadastrarCliente();
             }
         });
+
+        setVisible(true);
     }
 
     private void cadastrarCliente() {
@@ -103,10 +106,29 @@ public class Cadastro extends JFrame {
             CPF cpf = CPF.parser(cpfStr);
             DataNascimento dataNascimento = DataNascimento.parser(dataNascimentoStr);
 
+            // Cria um novo cliente
             Cliente cliente = new Cliente(nome, telefone, senha, dataNascimento, cpf) {};
 
-            // Salva o cliente em arquivo
-            salvarClienteEmArquivo(cliente);
+            // Seleciona o tipo de conta
+            String[] options = {"Conta Corrente", "Conta Poupança"};
+            int escolha = JOptionPane.showOptionDialog(this, "Escolha o tipo de conta:", "Tipo de Conta",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+
+            // Cria a conta com base na escolha do usuário
+            Conta conta = null;
+            if (escolha == 0) { // Conta Corrente
+                conta = new CCorrente();
+            } else if (escolha == 1) { // Conta Poupança
+                conta = new CPoupanca();
+            }
+
+            // Define o titular da conta
+            if (conta != null) {
+                cliente.abrirConta(conta);
+            }
+
+            // Salva o cliente e a conta em arquivo
+            salvarClienteEmArquivo(cliente, conta);
             JOptionPane.showMessageDialog(this, "Cliente cadastrado com sucesso!");
 
         } catch (TelefoneException | CPFException | DataNascimentoException | FormatoException ex) {
@@ -117,24 +139,24 @@ public class Cadastro extends JFrame {
     }
 
     private boolean cpfJaCadastrado(String cpfStr) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("clientes.txt"))) {
+        // Lógica para verificar se o CPF já está cadastrado
+        try (BufferedReader reader = new BufferedReader(new FileReader("contas.txt"))) {
             String linha;
             while ((linha = reader.readLine()) != null) {
-                // Supondo que os campos estão separados por vírgula
-                String[] campos = linha.split(",");
-                if (campos.length >= 5 && campos[4].trim().equals(cpfStr)) {
-                    return true; // CPF encontrado
+                String[] dados = linha.split(","); // Supondo que os dados estão separados por vírgula
+                if (dados.length > 4 && dados[4].equals(cpfStr)) { // CPF é o quinto campo
+                    return true;
                 }
             }
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Erro ao verificar CPF: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         }
-        return false; // CPF não encontrado
+        return false;
     }
 
-    private void salvarClienteEmArquivo(Cliente cliente) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("clientes.txt", true))) {
-            writer.write(cliente.toString());
+    private void salvarClienteEmArquivo(Cliente cliente, Conta conta) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("contas.txt", true))) {
+            writer.write(cliente.toString() + "," + conta.toString() + "," + conta.getClass().getSimpleName());
             writer.newLine();  // Adiciona uma nova linha após cada cliente
         }
     }

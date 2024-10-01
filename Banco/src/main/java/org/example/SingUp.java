@@ -4,6 +4,7 @@
  */
 package org.example;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -12,25 +13,19 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-/**
- *
- * @author rafae
- */
 public class SingUp extends javax.swing.JPanel {
 
-    /**
-     * Creates new form SingUp
-     */
-    public SingUp() {
-        initComponents();
-    }
     List<Pessoa> listaPessoas = new ArrayList<>();
     String nome;
     String telefone;
     String email;
     String senha;
-    String endereco;
+    String dataDeNacimento;
     String cpf;
+
+    public SingUp() {
+        initComponents();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,8 +49,6 @@ public class SingUp extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jTextField8 = new javax.swing.JTextField();
@@ -146,17 +139,7 @@ public class SingUp extends javax.swing.JPanel {
         });
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel10.setText("Email");
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel11.setText("Endereço");
-
-        jTextField6.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
-            }
-        });
+        jLabel10.setText("Data De Nascimento");
 
         jTextField7.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jTextField7.addActionListener(new java.awt.event.ActionListener() {
@@ -201,10 +184,6 @@ public class SingUp extends javax.swing.JPanel {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12)
                             .addComponent(jTextField8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -214,8 +193,10 @@ public class SingUp extends javax.swing.JPanel {
                                 .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPanel3Layout.createSequentialGroup()
                                     .addGap(94, 94, 94)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(105, 105, 105))))
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel10)))
                         .addGap(38, 38, 38))))
         );
         jPanel3Layout.setVerticalGroup(
@@ -227,18 +208,14 @@ public class SingUp extends javax.swing.JPanel {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -249,7 +226,7 @@ public class SingUp extends javax.swing.JPanel {
                 .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(112, 112, 112))
+                .addGap(111, 111, 111))
         );
 
         jPanel1.add(jPanel3);
@@ -283,10 +260,6 @@ public class SingUp extends javax.swing.JPanel {
         //Codigo aqui
     }//GEN-LAST:event_jTextField5ActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        //Codigo aqui
-    }//GEN-LAST:event_jTextField6ActionPerformed
-
     private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
         //Codigo aqui
     }//GEN-LAST:event_jTextField7ActionPerformed
@@ -295,137 +268,211 @@ public class SingUp extends javax.swing.JPanel {
         //Codigo aqui
     }//GEN-LAST:event_jTextField8ActionPerformed
 
+    private void salvarClienteEmArquivo(Cliente cliente, Conta conta) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("contas.txt", true))) {
+            writer.write(cliente.toString() + "," + conta.toString() + "," + conta.getClass().getSimpleName());
+            writer.newLine();  // Adiciona uma nova linha após cada cliente
+        }
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        
-        // Capturando os valores dos campos de texto ao clicar no botão
+ 
+        // Coleta de dados dos campos de texto
         nome = jTextField1.getText();
-        senha = new String(jPasswordField1.getPassword());  // Para capturar o valor do campo de senha
-        email = jTextField5.getText();
-        endereco = jTextField6.getText();
+        senha = new String(jPasswordField1.getPassword());
+        dataDeNacimento = jTextField5.getText();
         telefone = jTextField7.getText();
         cpf = jTextField8.getText();
 
-        // Verificando se todos os campos estão preenchidos (opcional, para validação)
-        if(nome.isEmpty() || senha.isEmpty() || email.isEmpty() || endereco.isEmpty() || telefone.isEmpty() || cpf.isEmpty()) {
+        // Validação dos campos
+        if(nome.isEmpty() || senha.isEmpty() || dataDeNacimento.isEmpty() || telefone.isEmpty() || cpf.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.", "Erro", JOptionPane.ERROR_MESSAGE);
-            return;  // Para impedir a criação da conta com campos vazios
-        }
-        
-        final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
-
-        Pattern pattern = Pattern.compile(EMAIL_REGEX);
-        Matcher matcher = pattern.matcher(email);
-        
-        if(!matcher.matches()){
-            JOptionPane.showMessageDialog(null, "Email invalido" , "Erro na Criação de Conta", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-        
-        String CPF_REGEX = "^\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}$|^\\d{11}$";
-
-        // Verificar o formato usando regex
-        if (!Pattern.matches(CPF_REGEX, cpf)){
-            JOptionPane.showMessageDialog(null, "CPF invalido" , "Erro na Criação de Conta", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
 
-        // Remover caracteres especiais, se existirem
-        cpf = cpf.replaceAll("\\D", "");
 
-        // Eliminar CPFs com todos os números iguais (e.g., "11111111111")
-        if (cpf.matches("(\\d)\\1{10}")) {
-            JOptionPane.showMessageDialog(null, "CPF invalido" , "Erro na Criação de Conta", JOptionPane.INFORMATION_MESSAGE);
+        // Validação do CPF
+        if (!validarCPF(cpf)) {
+            JOptionPane.showMessageDialog(null, "CPF inválido", "Erro na Criação de Conta", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
 
-        // Calcular o primeiro dígito verificador
-        int sum = 0;
-        for (int i = 0; i < 9; i++) {
-            sum += (cpf.charAt(i) - '0') * (10 - i);
-        }
-        int firstVerifier = 11 - (sum % 11);
-        if (firstVerifier >= 10) {
-            firstVerifier = 0;
+        // Confirmação dos dados
+        int opcao = JOptionPane.showConfirmDialog(null, "Confirme seus dados:\n Nome: "+ nome + 
+                "\n Telefone:  " + telefone +
+                "\n Data de Nascimento: " + dataDeNacimento + 
+                "\n CPF: " + cpf,
+                "Confirmação", JOptionPane.OK_CANCEL_OPTION);
+
+        if (opcao != JOptionPane.OK_OPTION) {
+            return; // Interrompe se o usuário não confirmar
         }
 
-        // Verificar se o primeiro dígito verificador está correto
-        if (firstVerifier != (cpf.charAt(9) - '0')) {
-            JOptionPane.showMessageDialog(null, "CPF invalido" , "Erro na Criação de Conta", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
+        try {
+            // Verifica se o CPF já está cadastrado
+            if (cpfJaCadastrado(cpf)) {
+                JOptionPane.showMessageDialog(null, "CPF já cadastrado!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-        // Calcular o segundo dígito verificador
-        sum = 0;
-        for (int i = 0; i < 10; i++) {
-            sum += (cpf.charAt(i) - '0') * (11 - i);
-        }
-        int secondVerifier = 11 - (sum % 11);
-        if (secondVerifier >= 10) {
-            secondVerifier = 0;
-        }
+            // Criação dos objetos com base nos dados coletados
+            Telefone telefoneObj = Telefone.parser(telefone);
+            CPF cpfObj = CPF.parser(cpf);
+            DataNascimento dataNascimentoObj = DataNascimento.parser(dataDeNacimento);
 
-        // Verificar se o segundo dígito verificador está correto
-        if(!(secondVerifier == (cpf.charAt(10) - '0'))){
-            JOptionPane.showMessageDialog(null, "CPF invalido" , "Erro na Criação de Conta", JOptionPane.INFORMATION_MESSAGE);
-            return;
+            Cliente cliente = new Cliente(nome, telefoneObj, senha, dataNascimentoObj, cpfObj);
+
+            // Seleção do tipo de conta
+            String[] options = {"Conta Corrente", "Conta Poupança"};
+            int escolha = JOptionPane.showOptionDialog(this, "Escolha o tipo de conta:", "Tipo de Conta",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+
+            Conta conta = null;
+            if (escolha == 0) {
+                conta = new CCorrente();
+            } else if (escolha == 1) {
+                conta = new CPoupanca();
+            }
+
+            if (conta != null) {
+                cliente.abrirConta(conta);
+            }
+
+            // Salva o cliente e a conta em arquivo
+            salvarClienteEmArquivo(cliente, conta);
+
+            JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!", "Cadastro Concluído", JOptionPane.INFORMATION_MESSAGE);
+
+            // Abre a tela de login após o cadastro
+            ContaManager contaManager = new ContaManager();
+            List<Conta> contas;
+
+            try {
+                contas = contaManager.carregarContas("contas.txt");
+
+                // Verificando se as contas foram criadas corretamente
+                for (Conta conta1 : contas) {
+                    System.out.println("Conta criada: " + conta1.getClass().getSimpleName());
+                    System.out.println("Titular: " + conta1.getTitular().getNome());
+                    System.out.println("Saldo: " + conta1.getSaldo());
+                    System.out.println("-----------------------");
+                }
+            } catch (IOException e) {
+                System.err.println("Erro ao carregar contas: " + e.getMessage());
+                return; // Sai do metodo caso ocorra um erro
+            }
+
+            GerenteManager gerenteManager = new GerenteManager();
+            Gerente gerente=null;
+            try {
+                gerenteManager.carregarGerente("gerente.txt");
+                gerente = gerenteManager.getGerente();
+                if (gerente != null) {
+                    System.out.println("Gerente carregado:");
+                    System.out.println("CPF: " + gerente.getCpf());
+                    // Aqui você pode verificar a senha, etc.
+                }
+            } catch (IOException e) {
+                System.err.println("Erro ao carregar gerente: " + e.getMessage());
+            }
+
+            JFrame LoginFrame = new JFrame("Login");
+            Login loginPanel = new Login(contaManager, contas,gerente); // Passa o gerenciador e as contas
+            LoginFrame.setContentPane(loginPanel);
+            LoginFrame.setContentPane(loginPanel);
+            LoginFrame.setSize(800, 500);
+            LoginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            LoginFrame.pack();
+            LoginFrame.setVisible(true);
+            LoginFrame.setLocationRelativeTo(null);
+            JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            parentFrame.dispose();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
-        
-        // Convirmar os dados
-        int opcao = JOptionPane.showConfirmDialog(null, "Confirme seus dados:\n nome: "+ nome + 
-                "\n email: " + email +
-                "\n telefone:  " + telefone +
-                "\n endereço: " + endereco + 
-                "\n cpf: " + cpf +
-                "", "Confirmação", JOptionPane.OK_CANCEL_OPTION);
-        
-        // Verifica qual opção foi selecionada
-        if (opcao == JOptionPane.OK_OPTION) {
-            System.out.println("Usuário clicou OK.");
-        } else if (opcao == JOptionPane.CANCEL_OPTION) {
-            System.out.println("Usuário clicou Cancelar.");
-            return;
-        } else {
-            System.out.println("Usuário fechou o diálogo.");
-            return;
-        }
-
-        
-        // Criando um objeto PF com os dados inseridos
-        PF pf1 = new PF(nome, telefone, email, senha, endereco, cpf);
-        listaPessoas.add(pf1);
-
-        // Salvando os dados no arquivo
-        String caminhoArquivo = "pessoas.txt";
-        ProcessarArquivos.salvarPessoas(caminhoArquivo, listaPessoas);
-
-        
-        JFrame LoginFrame = new JFrame("Login");
-        
-        Login loginPanel = new Login();
-        
-        // foi
-        LoginFrame.setContentPane(loginPanel);
-        
-        // inicializa bonitinho
-        LoginFrame.setSize(800, 500); 
-        LoginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-        LoginFrame.pack();
-        LoginFrame.setVisible(true); 
-        LoginFrame.setLocationRelativeTo(null);
-        JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        JOptionPane.showMessageDialog(null, "    Sua Conta foi Criada!" , "Conta Criada", JOptionPane.INFORMATION_MESSAGE);
-        //JOptionPane.showMessageDialog(null, "Sua Conta foi enviada para um gerente avaliar \n                    Aguarde a Aprovação!");
-        parentFrame.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+    private boolean validarCPF(String cpf) {
+           // Lógica de validação de CPF conforme o primeiro código
+           String CPF_REGEX = "^\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}$|^\\d{11}$";
+           if (!Pattern.matches(CPF_REGEX, cpf)) {
+               return false;
+           }
 
+           // Remover caracteres especiais
+           cpf = cpf.replaceAll("\\D", "");
+
+           // Eliminar CPFs com todos os números iguais
+           if (cpf.matches("(\\d)\\1{10}")) {
+               return false;
+           }
+
+           // Cálculo dos dígitos verificadores
+           int sum = 0;
+           for (int i = 0; i < 9; i++) {
+               sum += (cpf.charAt(i) - '0') * (10 - i);
+           }
+           int firstVerifier = 11 - (sum % 11);
+           if (firstVerifier >= 10) {
+               firstVerifier = 0;
+           }
+           if (firstVerifier != (cpf.charAt(9) - '0')) {
+               return false;
+           }
+
+           sum = 0;
+           for (int i = 0; i < 10; i++) {
+               sum += (cpf.charAt(i) - '0') * (11 - i);
+           }
+           int secondVerifier = 11 - (sum % 11);
+           if (secondVerifier >= 10) {
+               secondVerifier = 0;
+           }
+           return secondVerifier == (cpf.charAt(10) - '0');
+       }
+    private void salvarClienteEmArquivo(Pessoa pessoa) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("contas.txt", true))) {
+            writer.write(pessoa.toString());
+            writer.newLine();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao salvar os dados.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private boolean cpfJaCadastrado(String cpfStr) {
+        // Lógica para verificar se o CPF já está cadastrado em "contas.txt"
+        try (BufferedReader reader = new BufferedReader(new FileReader("contas.txt"))) {
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+                String[] dados = linha.split(","); // Supondo que os dados estão separados por vírgula
+                if (dados.length > 4 && dados[4].equals(cpfStr)) { // CPF é o quinto campo
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Lógica para verificar se o CPF já está cadastrado em "gerente.txt"
+        try (BufferedReader reader = new BufferedReader(new FileReader("gerente.txt"))) {
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+                String[] dados = linha.split(","); // Supondo que os dados estão separados por vírgula
+                if (dados.length > 0 && dados[0].equals(cpfStr)) { // CPF é o primeiro campo
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return false; // CPF não encontrado em nenhum dos arquivos
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup TipoDePessoa;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
@@ -439,7 +486,6 @@ public class SingUp extends javax.swing.JPanel {
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     // End of variables declaration//GEN-END:variables

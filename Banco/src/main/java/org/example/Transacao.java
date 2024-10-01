@@ -1,6 +1,4 @@
-package org.example.Pacote;
-import java.io.FileWriter;
-import java.io.IOException;
+package org.example;
 import java.time.LocalDate;
 
 public class Transacao {
@@ -21,21 +19,8 @@ public class Transacao {
         this.remetente = remetente;
     }
 
-
-
     public int getIdtransacao() {
         return idtransacao;
-    }
-
-    public void salvarEmCSV() {
-        String arquivo = "transacoes.csv";
-        try (FileWriter writer = new FileWriter(arquivo, true)) {  // true para adicionar ao arquivo existente
-            writer.append(String.format("%d,%.2f,%s,%s,%s,%s\n",
-                    idtransacao,valor,this.getData(),tipo,autor,remetente));  // Salvando o id da conta associada
-            System.out.println("Dados da transação salvos no CSV.");
-        } catch (IOException e) {
-            System.out.println("Erro ao salvar no arquivo CSV: " + e.getMessage());
-        }
     }
 
     public double getValor() {
@@ -59,4 +44,6 @@ public class Transacao {
     public String getRemetente() {
         return remetente;
     }
+
+
 }

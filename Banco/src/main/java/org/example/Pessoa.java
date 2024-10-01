@@ -1,48 +1,20 @@
     package org.example;
 
-    public class Pessoa {
-        private String nome;
-        private String telefone;
-        private String email;
+    public abstract class Pessoa {
+        private CPF cpf;
         private String senha;
 
-        public Pessoa(){
-        }
-        public Pessoa( String nome,String telefone, String email, String senha) {
-            this.nome = nome;
-            this.email = email;
-            this.telefone = telefone;
+
+        public Pessoa(CPF cpf, String senha) {
+            this.cpf = cpf;
             this.senha = senha;
         }
-        //GETTERS
-        public String getNome() {
-            return nome;
+
+        public CPF getCpf() {
+            return cpf;
         }
-        public String getTelefone() {
-            return telefone;
-        }
-        public String getEmail() {
-            return email;
-        }
+
         public String getSenha() {
             return senha;
         }
-
-        //SETTERS
-        public void setEmail(String email) {
-            this.email = email;
-        }
-        public void setSenha(String senha) {
-            this.senha = senha;
-        }
-        public void setTelefone(String telefone) {
-            this.telefone = telefone;
-        }
-
-
-        public void setNome(String nome) {
-            this.nome = nome;
-        }
-
-
     }

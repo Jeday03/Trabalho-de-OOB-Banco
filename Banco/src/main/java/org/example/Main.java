@@ -40,7 +40,7 @@ public class Main {
         }
 
         JFrame frame = new JFrame("Login");
-//        Login loginPanel = new Login(contaManager, contas,gerente); // Passa o gerenciador e as contas
+        Login loginPanel = new Login(contaManager, contas,gerente); // Passa o gerenciador e as contas
 //        frame.setContentPane(loginPanel);
 //        gerente.excluirConta("123.456.789-09");
 

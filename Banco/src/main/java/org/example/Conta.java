@@ -1,5 +1,7 @@
 package org.example;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
@@ -111,6 +113,22 @@ public abstract class Conta {
             }
         }
         return false;
+    }
+    public void salvarExtratoEmArquivo(String nomeArquivo) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(nomeArquivo))) {
+            for (Map.Entry<CPF, List<Transacao>> entry : extrato.entrySet()) {
+                CPF cpf = entry.getKey();
+                List<Transacao> transacoes = entry.getValue();
+                writer.write("Extrato para CPF: " + cpf + "\n");
+                for (Transacao transacao : transacoes) {
+                    writer.write(transacao.toString() + "\n");
+                }
+                writer.write("\n"); // Adiciona uma linha em branco entre os extratos de diferentes CPFs
+            }
+            System.out.println("Extrato salvo em " + nomeArquivo);
+        } catch (IOException e) {
+            System.err.println("Erro ao salvar o extrato: " + e.getMessage());
+        }
     }
 
     public double getSaldo() {

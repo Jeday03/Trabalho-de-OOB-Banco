@@ -201,14 +201,6 @@ public class InterfaceGerente extends javax.swing.JPanel {
 
         try {
             contas = contaManager.carregarContas("contas.txt");
-
-            // Verificando se as contas foram criadas corretamente
-            for (Conta conta : contas) {
-                System.out.println("Conta criada: " + conta.getClass().getSimpleName());
-                System.out.println("Titular: " + conta.getTitular().getNome());
-                System.out.println("Saldo: " + conta.getSaldo());
-                System.out.println("-----------------------");
-            }
         } catch (IOException e) {
             System.err.println("Erro ao carregar contas: " + e.getMessage());
             return; // Sai do metodo caso ocorra um erro
@@ -219,11 +211,6 @@ public class InterfaceGerente extends javax.swing.JPanel {
         try {
             gerenteManager.carregarGerente("gerente.txt");
             gerente = gerenteManager.getGerente();
-            if (gerente != null) {
-                System.out.println("Gerente carregado:");
-                System.out.println("CPF: " + gerente.getCpf());
-                // Aqui você pode verificar a senha, etc.
-            }
         } catch (IOException e) {
             System.err.println("Erro ao carregar gerente: " + e.getMessage());
         }

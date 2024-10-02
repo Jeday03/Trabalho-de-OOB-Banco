@@ -222,7 +222,7 @@
                                   <Component id="campoNome" alignment="0" max="32767" attributes="0"/>
                                   <Component id="campoTelefone" alignment="0" max="32767" attributes="0"/>
                                   <Component id="campoSenha" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="campoTelefone2" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="campoDataNascimento" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -258,7 +258,7 @@
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="campoTelefone2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="campoDataNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="16" max="32767" attributes="0"/>
                   </Group>
@@ -334,9 +334,9 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoTelefoneActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="campoTelefone2">
+            <Component class="javax.swing.JTextField" name="campoDataNascimento">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoTelefone2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoDataNascimentoActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

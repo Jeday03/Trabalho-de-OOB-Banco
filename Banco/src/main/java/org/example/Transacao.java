@@ -18,6 +18,7 @@ public class Transacao {
         this.autor = autor;
         this.remetente = remetente;
     }
+    
 
     public int getIdtransacao() {
         return idtransacao;

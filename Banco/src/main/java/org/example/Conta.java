@@ -11,7 +11,7 @@ public abstract class Conta {
     private double saldo;
 
     // Map para armazenar o extrato por idConta
-    private static Map<CPF, List<Transacao>> extrato = new HashMap<>();
+    private Map<CPF, List<Transacao>> extrato = new HashMap<>();
 
     public void setTitular(Cliente titular) {
         this.titular = titular;
@@ -31,8 +31,8 @@ public abstract class Conta {
 
 
     // Getter para extrato
-    public static Map<CPF, List<Transacao>> getExtrato() {
-        return extrato;
+    public Map<CPF, List<Transacao>> getExtrato() {
+        return this.extrato;
     }
 
     public void incrementaSaldo(Cliente autor, double valor) throws IOException {

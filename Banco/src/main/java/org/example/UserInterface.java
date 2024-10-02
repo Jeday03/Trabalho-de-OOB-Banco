@@ -323,10 +323,26 @@ public class UserInterface extends javax.swing.JFrame{
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         StringBuilder extratoStr = new StringBuilder("Extrato:\n");
-        /*for (String movimento : conta.getExtrato()) {
-            extratoStr.append(movimento).append("\n");
-        }*/
+    
+        // Obtendo o CPF do titular da conta
+        CPF cpfTitular = conta.getTitular().getCpf();
+
+        // Obtendo o extrato do titular
+        List<Transacao> transacoes = conta.getExtrato().get(cpfTitular);
+
+        if (transacoes != null && !transacoes.isEmpty()) {
+            for (Transacao transacao : transacoes) {
+                extratoStr.append(transacao.toString()).append("\n");
+            }
+        } else {
+            extratoStr.append("Nenhuma transação disponível.\n");
+        }
+
+        // Exibir o extrato em uma caixa de diálogo
         JOptionPane.showMessageDialog(this, extratoStr.toString(), "Extrato", JOptionPane.INFORMATION_MESSAGE);
+
+        // Salvar o extrato em um arquivo
+        conta.salvarExtratoEmArquivo("extrato.txt");
 
     }//GEN-LAST:event_jButton2ActionPerformed
 

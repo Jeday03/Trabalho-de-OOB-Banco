@@ -120,7 +120,7 @@ public abstract class Conta {
                 List<Transacao> transacoes = entry.getValue();
                 writer.write("Extrato para CPF: " + cpf + "\n");
                 for (Transacao transacao : transacoes) {
-                    writer.write(transacao.toString() + "\n");
+                    writer.write(transacao.toString() + "\n");  // Usando o formato atualizado
                 }
                 writer.write("\n"); // Adiciona uma linha em branco entre os extratos de diferentes CPFs
             }

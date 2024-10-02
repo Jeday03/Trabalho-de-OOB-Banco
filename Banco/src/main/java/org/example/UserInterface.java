@@ -333,7 +333,7 @@ public class UserInterface extends javax.swing.JFrame{
 
         if (transacoes != null && !transacoes.isEmpty()) {
             for (Transacao transacao : transacoes) {
-                extratoStr.append(transacao.toString()).append("\n");
+                extratoStr.append(transacao.toString()).append("\n"); // Usando toString atualizado da Transacao
             }
         } else {
             extratoStr.append("Nenhuma transação disponível.\n");
@@ -344,7 +344,6 @@ public class UserInterface extends javax.swing.JFrame{
 
         // Salvar o extrato em um arquivo
         conta.salvarExtratoEmArquivo("extrato.txt");
-
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

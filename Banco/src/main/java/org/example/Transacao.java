@@ -37,15 +37,23 @@ public class Transacao {
 
     @Override
     public String toString() {
-        return
-                "idtransacao=" + idtransacao +
-                ", valor=" + valor +
-                ", data=" + data+
-                ", tipo='" + tipo + '\'' +
-                ", autor='" + autor + '\'' +
-                ", remetente='" + remetente + '\''
-                ;
+        StringBuilder sb = new StringBuilder();
+        sb.append("idtransacao=").append(idtransacao)
+                .append(", valor=").append(valor)
+                .append(", data=").append(data)
+                .append(", tipo='").append(tipo).append('\'');
+
+        if (autor != null) {
+            sb.append(", autor='").append(autor).append('\'');
+        }
+
+        if (remetente != null) {
+            sb.append(", remetente='").append(remetente).append('\'');
+        }
+
+        return sb.toString();
     }
+
 
     public String getTipo() {
         return tipo;

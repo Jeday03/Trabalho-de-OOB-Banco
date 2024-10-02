@@ -310,6 +310,7 @@ public class UserInterface extends javax.swing.JFrame{
         frame.setVisible(true);
         JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
         parentFrame.dispose();
+
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

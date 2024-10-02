@@ -98,7 +98,7 @@ public class InterfaceGerente extends javax.swing.JPanel {
         campoNome = new javax.swing.JTextField();
         campoSenha = new javax.swing.JTextField();
         campoTelefone = new javax.swing.JTextField();
-        campoTelefone2 = new javax.swing.JTextField();
+        campoDataNascimento = new javax.swing.JTextField();
 
         jPanel1.setMinimumSize(new java.awt.Dimension(800, 600));
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 600));
@@ -237,7 +237,26 @@ public class InterfaceGerente extends javax.swing.JPanel {
         jLabel7.setText("Senha");
 
         jLabel8.setText("DataNascimento");
+        jTable1.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                int row = jTable1.getSelectedRow(); // Obtem a linha selecionada
+                if (row != -1) {
+                    // Supondo que você tenha um modelo de tabela com colunas na ordem correta
+                    String cpf = jTable1.getValueAt(row, 0).toString();
+                    String nome = jTable1.getValueAt(row, 1).toString();
+                    String telefone = jTable1.getValueAt(row, 2).toString();
+                    String senha = jTable1.getValueAt(row, 3).toString();
+                    String dataNascimento = jTable1.getValueAt(row, 4).toString();
 
+                    // Atualiza os campos de texto
+                    campoCPF.setText(cpf);
+                    campoNome.setText(nome);
+                    campoTelefone.setText(telefone);
+                    campoSenha.setText(senha);
+                    campoDataNascimento.setText(dataNascimento);
+                }
+            }
+        });
         campoCPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoCPFActionPerformed(evt);
@@ -256,9 +275,9 @@ public class InterfaceGerente extends javax.swing.JPanel {
             }
         });
 
-        campoTelefone2.addActionListener(new java.awt.event.ActionListener() {
+        campoDataNascimento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoTelefone2ActionPerformed(evt);
+                campoDataNascimentoActionPerformed(evt);
             }
         });
 
@@ -291,7 +310,7 @@ public class InterfaceGerente extends javax.swing.JPanel {
                             .addComponent(campoNome)
                             .addComponent(campoTelefone)
                             .addComponent(campoSenha)
-                            .addComponent(campoTelefone2))))
+                            .addComponent(campoDataNascimento))))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         DireitaLayout.setVerticalGroup(
@@ -318,7 +337,7 @@ public class InterfaceGerente extends javax.swing.JPanel {
                 .addGap(16, 16, 16)
                 .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(campoTelefone2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -445,9 +464,9 @@ public class InterfaceGerente extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_campoTelefoneActionPerformed
 
-    private void campoTelefone2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoTelefone2ActionPerformed
+    private void campoDataNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoDataNascimentoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoTelefone2ActionPerformed
+    }//GEN-LAST:event_campoDataNascimentoActionPerformed
     private void carregarTabela() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0); // Clear existing rows
@@ -466,10 +485,10 @@ public class InterfaceGerente extends javax.swing.JPanel {
     private javax.swing.JPanel Direita;
     private javax.swing.JPanel Esquerda;
     private javax.swing.JTextField campoCPF;
+    private javax.swing.JTextField campoDataNascimento;
     private javax.swing.JTextField campoNome;
     private javax.swing.JTextField campoSenha;
     private javax.swing.JTextField campoTelefone;
-    private javax.swing.JTextField campoTelefone2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

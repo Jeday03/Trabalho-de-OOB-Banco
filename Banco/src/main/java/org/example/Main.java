@@ -7,6 +7,11 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
+        //Rafael Rosa Machado Gawryszewski - Matrícula: 202365055A
+        //Pedro Nitzsche Mesquita Garbois - Matrícula: 202076025
+        //Yury Vieira Marques Oliveira - Matrícula: 202270040
+        //Felipe Gotelip Delgado - Matrícula: 202365501B
+
         ContaManager contaManager = new ContaManager();
         List<Conta> contas;
 

@@ -17,6 +17,7 @@ public class Transacao {
         this.tipo = tipo;
         this.autor = autor;
         this.remetente = remetente;
+        this.data = data;
     }
     
 
@@ -32,6 +33,18 @@ public class Transacao {
         int dia = data.getDayOfMonth(),mes= data.getMonthValue(),ano = data.getYear();
         String data = dia + "/" + mes + "/" + ano;
         return data;
+    }
+
+    @Override
+    public String toString() {
+        return
+                "idtransacao=" + idtransacao +
+                ", valor=" + valor +
+                ", data=" + data+
+                ", tipo='" + tipo + '\'' +
+                ", autor='" + autor + '\'' +
+                ", remetente='" + remetente + '\''
+                ;
     }
 
     public String getTipo() {

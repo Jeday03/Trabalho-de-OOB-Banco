@@ -1,8 +1,4 @@
 Extrato para CPF: 123.456.789-09
-org.example.Transacao@102433e7
-org.example.Transacao@444b8b31
-org.example.Transacao@7bf98342
-org.example.Transacao@30bf8acb
-org.example.Transacao@1b53c30
-org.example.Transacao@193f3d34
+idtransacao=1, valor=-23123.0, data=2024-10-01, tipo='Saque', autor='null', remetente='null'
+idtransacao=2, valor=-23123.0, data=2024-10-01, tipo='Saque', autor='null', remetente='null'
 

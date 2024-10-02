@@ -83,7 +83,7 @@ public class Login extends javax.swing.JPanel {
                 String senha = new String(jPasswordField1.getPassword());
                 if (validarLogin(cpf, senha, false)) { // false indica que estamos validando um gerente
                     JFrame frame = new JFrame("Interface do Gerente");
-            frame.setSize(800, 535);
+            frame.setSize(880, 535);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
             // Adiciona o painel de login

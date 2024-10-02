@@ -327,11 +327,9 @@ public class InterfaceGerente extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(DireitaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(campoDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(DireitaLayout.createSequentialGroup()
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(46, Short.MAX_VALUE))))
+                            .addComponent(jLabel8)))
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.add(Direita);
@@ -347,8 +345,28 @@ public class InterfaceGerente extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+        jTable1.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                int row = jTable1.getSelectedRow(); // Obtem a linha selecionada
+                if (row != -1) {
+                    // Supondo que você tenha um modelo de tabela com colunas na ordem correta
+                    String cpf = jTable1.getValueAt(row, 0).toString();
+                    String nome = jTable1.getValueAt(row, 1).toString();
+                    String telefone = jTable1.getValueAt(row, 2).toString();
+                    String senha = jTable1.getValueAt(row, 3).toString();
+                    String dataNascimento = jTable1.getValueAt(row, 4).toString();
+
+                    // Atualiza os campos de texto
+                    campoCPF.setText(cpf);
+                    campoNome.setText(nome);
+                    campoTelefone.setText(telefone);
+                    campoSenha.setText(senha);
+                    campoDataNascimento.setText(dataNascimento);
+                }
+            }
+        });
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
